@@ -3,7 +3,6 @@
   it('Should give me 35 numbers as the level is easy. ', function () {
     let instance = sudoku()
    instance.intialBoard("easy")
-   console.log("---------END-----------")
   });
 
   it('Should give me 25 numbers as level is intermediate. ', function () {

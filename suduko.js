@@ -22,6 +22,7 @@ function sudoku() {
     }
 
     function intialBoard(level) {
+        console.log(`**${level}**`)
         let a = 0;
         let b = 0;
         let rounds = 0;
@@ -41,10 +42,9 @@ function sudoku() {
             }else{b += 1}
         }
 
-        console.log("________________________________________________")
-        console.log(`**${level}**`)
         console.log("success:"+a, "|duplicates:" +b, "|total:"+ (a+b))
         TESTING()
+           console.log("---------END-----------")
     }
 
     function checkRow(row) {
