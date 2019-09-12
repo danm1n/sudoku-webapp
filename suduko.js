@@ -45,13 +45,12 @@ function sudoku() {
             } else {
                 b += 1
                 z = z - 1;
-                console.log(`${b} -rolling back 1`)
+                // console.log(`${b} -rolling back 1`)
             }
         }
-
-        console.log("success:" + a, "|duplicates:" + c, "|trying to replace:" + b, "-[total:" + (a + b + c) + "]")
+        // console.log("success:" + a, "|trying to replace:" + b, "-[total:" + (a) + "]")
         TESTING()
-        console.log("---------END-----------")
+        // console.log("---------END-----------")
     }
 
     function checkGrid(row, col, random) {
@@ -60,7 +59,10 @@ function sudoku() {
         number = number.filter(function (val) {
             return array_x.indexOf(val) == -1;
         });
-
+        let avaiblable_inBlock = checkBlock(row,col)
+        number = number.filter(function (val) {
+            return avaiblable_inBlock.indexOf(val) == -1;
+        });
         // console.log(`avail :${number[k] === random}, number:${random} array:${number} index:${k}`)
       
         for (var z = 0; z < array_x.length; z++) {
@@ -95,6 +97,36 @@ function sudoku() {
         return false;
     }
 
+    function checkBlock(row,col){
+        if(col === 1 || col === 2) col = 0
+        if(col === 4 || col === 5) col = 3
+        if(col === 7 || col === 8) col = 6
+        if(row === 1 || row === 2) row = 0
+        if(row === 4 || row === 5) row = 3
+        if(row === 7 || row === 8) row = 6
+        // console.log(col)
+
+        let block_1 = array[row][col]
+        let block_2 = array[row][col+1]
+        let block_3 = array[row][col+2]
+        let block_4 = array[row+1][col]
+        let block_5 = array[row+1][col+1]
+        let block_6 = array[row+1][col+2]
+        let block_7 = array[row+2][col]
+        let block_8 = array[row+2][col+1]
+        let block_9 = array[row+2][col+2]
+        
+        let block = [
+                [block_1,block_2,block_3],
+                [block_4,block_5,block_6],
+                [block_7,block_8,block_9]
+                    ]
+                    // console.log(`col:${col} row:${row}`)
+                    // console.log(block)
+
+        return [block_1,block_2,block_3,block_4,block_5,block_6,block_7,block_8,block_9]
+        
+    }
 
 
 
