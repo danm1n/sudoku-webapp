@@ -1,7 +1,7 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
-const suduko = require('./suduko');
+// const suduko = require('./suduko');
 const app = express();
 const session = require('express-session');
 const pg = require("pg");
@@ -19,24 +19,20 @@ const pool = new Pool({
   ssl : useSSL
 });
 
-
-
  app.use(session({
   secret : "12345",
   resave: false,
   saveUninitialized: true
 }));
 
-
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', async function (req, res) {
-
-  res.render('index', {
-   
-  })
+app.get('/', function (req, res) {
+   res.sendFile('index.html');
+  //  res.send('Hello')
+   console.log('test342')
 });
 
 
