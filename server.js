@@ -1,11 +1,14 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
-// const suduko = require('./suduko');
 const app = express();
 const session = require('express-session');
 const pg = require("pg");
 const Pool = pg.Pool;
+
+const Sudoku = require('./src/sudoku/generate');
+const Routes = require('./routes/sudoku_routes');
+const Sudoku_Api = require('./api/sudoku_api');
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -25,16 +28,13 @@ const pool = new Pool({
   saveUninitialized: true
 }));
 
-app.use(express.static('public'));
+app.use(express.static('build'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', function (req, res) {
-   res.sendFile('index.html');
-  //  res.send('Hello')
-   console.log('test342')
-});
-
+const sudoku = Sudoku()
+const sudoku_api = Sudoku_Api(sudoku)
+Routes(app,sudoku_api)
 
 let PORT = process.env.PORT || 4732;
 

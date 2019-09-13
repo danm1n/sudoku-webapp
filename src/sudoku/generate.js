@@ -1,4 +1,4 @@
-function sudoku() {
+module.exports = () => {
 
     let array = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -27,6 +27,7 @@ function sudoku() {
     }
 
     function intialBoard(level) {
+        array = array1
         console.log(`**${level}**`)
 
         let rounds = 0;
@@ -50,6 +51,8 @@ function sudoku() {
         }
         // console.log("success:" + a, "|trying to replace:" + b, "-[total:" + (a) + "]")
         TESTING()
+        return array;
+      
         // console.log("---------END-----------")
     }
 
@@ -128,7 +131,19 @@ function sudoku() {
         
     }
 
+    let array1 = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
 
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]
 
 
 
