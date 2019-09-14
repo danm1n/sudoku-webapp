@@ -1,9 +1,9 @@
-module.exports = (generate) => {
+module.exports = (generate,solver) => {
 
-    let all = async (req, res) => {
+    let all = (req, res) => {
         let mode = req.params.mode;
         try {
-            let genPuzzle = await generate.intialBoard(mode);
+            let genPuzzle = generate.intialBoard(mode);
             res.json({
                 status: 'success',
                 data: genPuzzle

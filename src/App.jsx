@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.gif';
-import './App.css';
+import './styling/App.css';
 
 function App() {
   return (

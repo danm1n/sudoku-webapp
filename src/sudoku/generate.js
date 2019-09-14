@@ -14,6 +14,20 @@ module.exports = () => {
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
 
+    let array1 = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+
     let num = 0;
     let random = 0;
     let a = 0;
@@ -27,9 +41,8 @@ module.exports = () => {
     }
 
     function intialBoard(level) {
+        // console.log(`**${level}**`)
         array = array1
-        console.log(`**${level}**`)
-
         let rounds = 0;
         if (level === "easy") rounds = 35
         if (level === "intermediate") rounds = 25
@@ -39,43 +52,32 @@ module.exports = () => {
         for (var z = 0; z < rounds; z++) {
             let row = generateNumber(0, 8)
             let col = generateNumber(0, 8)
-            // console.log(row)
             random = generateNumber(1, 9)
             if (checkGrid(row, col, random) === true) {
                 a += 1
             } else {
                 b += 1
-                z = z - 1;
-                // console.log(`${b} -rolling back 1`)
             }
         }
-        // console.log("success:" + a, "|trying to replace:" + b, "-[total:" + (a) + "]")
-        TESTING()
         return array;
-      
-        // console.log("---------END-----------")
     }
 
     function checkGrid(row, col, random) {
         let array_x = array[row]
-        let number = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        number = number.filter(function (val) {
-            return array_x.indexOf(val) == -1;
-        });
+        let avaiblable_numbers = checkRow(row)
+        
         let avaiblable_inBlock = checkBlock(row,col)
-        number = number.filter(function (val) {
+        avaiblable_numbers = avaiblable_numbers.filter(function (val) {
             return avaiblable_inBlock.indexOf(val) == -1;
         });
-        // console.log(`avail :${number[k] === random}, number:${random} array:${number} index:${k}`)
-      
         for (var z = 0; z < array_x.length; z++) {
             random = generateNumber(1, 9)
             if (array[row][col] === 0) {
-                if (validate(number, random, col) === true) {
-                    // console.log(`row:${row} random:${random}`)
+                if (checkColumn(avaiblable_numbers, random, col) === true) {
                     array[row][col] = random   // making the random sudoku block equal to a random number after it passed all tests
                     return true;
                 } else {
+                    return false;
                     z = 0
                 }
             } else {
@@ -84,13 +86,21 @@ module.exports = () => {
         }
     }
 
-    function validate(number, random, col) {
+    function checkRow(row){
+        let array_x = array[row]
+        let number = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        number = number.filter(function (val) {
+            return array_x.indexOf(val) == -1;
+        });
+        return number;
+    }
+
+    function checkColumn(number, random, col) {
         for (var k = 0; k < number.length; k++) { //double checking if avaiblable number hasnt been used yet
             if (number[k] === random) {
                 for(var k  = 0; k < array.length;k++){   //checking column
                     let columns = array[k][col]
                     if(columns === random){
-                        // console.log('loc---> row/col:'+ k+"/"+col + ' number:'+random)
                         return false;
                     }
                 }
@@ -124,26 +134,11 @@ module.exports = () => {
                 [block_4,block_5,block_6],
                 [block_7,block_8,block_9]
                     ]
-                    // console.log(`col:${col} row:${row}`)
-                    // console.log(block)
 
         return [block_1,block_2,block_3,block_4,block_5,block_6,block_7,block_8,block_9]
         
     }
 
-    let array1 = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
 
 
 
