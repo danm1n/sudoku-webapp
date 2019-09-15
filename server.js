@@ -6,7 +6,7 @@ const session = require('express-session');
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const Sudoku = require('./src/sudoku/generate');
+const Sudoku = require('./src/sudoku/sudoku');
 const Routes = require('./routes/sudoku_routes');
 const Sudoku_Api = require('./api/sudoku_api');
 const Solver = require('./src/sudoku/solver')
