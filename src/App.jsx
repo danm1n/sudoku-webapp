@@ -1,18 +1,15 @@
 import React from 'react';
-import logo from './logo.gif';
-import './styling/App.css';
+import { Route, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import NewGame from './pages/NewGame';
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <code>Sudoku coming soon!</code>
-        </p>
-      </header>
-    </div>
-  );
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/new-game" component={NewGame} />
+    </Switch>
+  )
 }
 
-export default App;
