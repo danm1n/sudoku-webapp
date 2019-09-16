@@ -40,6 +40,7 @@ module.exports = () => {
 
 function intialBoard(level){
     let rounds = 0;
+    resetGrid()
     populateGrid()
     sudoku_Solver.solve(grid,row, col)
     if (level === "easy") rounds = 36
@@ -56,6 +57,13 @@ function intialBoard(level){
     return grid;
 }
 
+    function resetGrid(){
+        for(var row = 0; row < grid.length; row++){
+            for(var col = 0; col < grid.length;col++){
+                grid[row][col] = 0;
+            }
+        }
+    }
 
     return {
         intialBoard,
