@@ -43,6 +43,8 @@ function intialBoard(level){
     resetGrid()
     populateGrid()
     sudoku_Solver.solve(grid,row, col)
+    let answer = JSON.stringify(grid)
+
     if (level === "easy") rounds = 36
     if (level === "intermediate") rounds = 56
     if (level === "hard") rounds = 63
@@ -54,7 +56,8 @@ function intialBoard(level){
         grid[row][col] = 0;
         }else{z = z - 1}
     }
-    return grid;
+
+    return [grid,JSON.parse(answer)]
 }
 
     function resetGrid(){

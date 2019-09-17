@@ -1,4 +1,4 @@
-module.exports = (generate,solver) => {
+module.exports = (generate, solver) => {
 
     let all = (req, res) => {
         let mode = req.params.mode;
@@ -6,7 +6,8 @@ module.exports = (generate,solver) => {
             let genPuzzle = generate.intialBoard(mode);
             res.json({
                 status: 'success',
-                data: genPuzzle
+                data: genPuzzle[0],
+                answer: genPuzzle[1]
             });
         }
         catch (err) {
@@ -17,8 +18,17 @@ module.exports = (generate,solver) => {
         }
     };
 
+    let checker = (req, res) => {
+        console.log('test')
+        let grid = req.body.grid;
+        console.log(grid)
+        if(solver.solve(grid,0,0)){
 
-return{
-    all
-}
+        }
+        res.redirect('/')
+    }
+        return {
+            all,
+            checker
+        }
 }
