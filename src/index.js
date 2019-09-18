@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './styling/index.css';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App.jsx';
 // import * as serviceWorker from './serviceWorker';
 
 render(
-    <BrowserRouter>
+    <HashRouter>
     <App />
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('root')
 )
 
