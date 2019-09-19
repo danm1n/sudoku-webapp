@@ -68,7 +68,7 @@ export default class GenerateGame extends React.Component {
       <div>
 
 <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog" role="document">
+  <div className="modal-dialog modal-dialog-centered" role="document">
     <div className="modal-content">
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">{this.state.response[0]}</h5>
