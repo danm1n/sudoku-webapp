@@ -45,7 +45,7 @@ function intialBoard(level){
     sudoku_Solver.solve(grid,row, col)
     let answer = JSON.stringify(grid)
 
-    if (level === "easy") rounds = 36
+    if (level === "easy") rounds = 3
     if (level === "intermediate") rounds = 56
     if (level === "hard") rounds = 63
     if (level === "expert") rounds = 71

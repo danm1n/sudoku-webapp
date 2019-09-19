@@ -1,14 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './styling/index.css';
-import { HashRouter } from 'react-router-dom';
 import App from './App.jsx';
 // import * as serviceWorker from './serviceWorker';
 
 render(
-    <HashRouter>
-    <App />
-    </HashRouter>,
+    
+    <App />,
     document.getElementById('root')
 )
 

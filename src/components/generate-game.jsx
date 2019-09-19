@@ -3,12 +3,17 @@ import axios from 'axios';
 import '../styling/App.css';
 
 export default class GenerateGame extends React.Component {
-  state = {
-    grid: []
+  constructor(props){
+    super(props);
+    this.state ={
+      grid: [],
+      level: props.level
+    }
   }
 
   componentDidMount() {
-    axios.get(`/api/new-game/easy`)
+    let level = this.state.level
+    axios.get(`/api/new-game/${level}`)
       .then(res => {
         const grid = res.data.data;
         this.setState({ grid });
