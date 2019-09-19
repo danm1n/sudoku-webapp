@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../styling/App.css';
+
 
 export default class GenerateGame extends React.Component {
   constructor(props){
     super(props);
     this.state ={
       grid: [],
-      level: props.level
+      level: props.level,
+      response: '',
     }
   }
 
@@ -29,7 +32,7 @@ export default class GenerateGame extends React.Component {
         if(grid[row][col] !== 0 && typeof(grid[row][col]) !== "string"){
         children.push(<td className="exists"><input name={[row,col]} class="input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
       }else{
-        children.push(<td><input name={[row,col]} class="input" type="number" pattern="\d*" maxlength="1" onChange={this.handleChange} /></td>)
+        children.push(<td><input name={[row,col]} class="input" type="number" pattern="\d*" maxlength="1" min="1" max="9" onChange={this.handleChange} required/></td>)
       }
     }
       table.push(<tr>{children}</tr>)
@@ -38,16 +41,12 @@ export default class GenerateGame extends React.Component {
   }
 
   handleChange = event => {
-    // console.log(event.target.name)
     let grid = this.state.grid
     let row = Number(event.target.name[0])
     let col = Number(event.target.name[2]) 
     grid[row][col] = event.target.value
-    console.log(grid)
-
     
     this.setState({ grid });
-    // console.log(this.state.grid)
   }
 
   handleSubmit = event => {
@@ -55,24 +54,45 @@ export default class GenerateGame extends React.Component {
 
     const { grid } =
       this.state
-    // console.log(number)
     axios.post(`/check`, { grid })
       .then(res => {
-        console.log(grid)
+        this.setState({response: res.data.data})
+        this.setState({popup: 'd-block'})
+        console.log(this.state)
       })
   }
 
 
   render() {
     return (
+      <div>
+
+<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">{this.state.response[0]}</h5>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="modal-footer">
+        <Link to={this.state.response[2]}><button type="button" className="btn btn-warning btn-md button">{this.state.response[1]}</button></Link>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       <form onSubmit={this.handleSubmit}>
       <table>
         {this.makeTable()}
     </table>
     <div className="row justify-content-center">
-    <button className="btn btn-warning btn-md button" type="submit">Check</button>
+    <button data-toggle="modal" data-target="#exampleModal" className="btn btn-warning btn-md button" type="submit">Check</button>
     </div>
     </form>
+    </div>
     )
   }
 }

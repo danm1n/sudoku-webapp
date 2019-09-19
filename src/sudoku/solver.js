@@ -2,7 +2,6 @@ const checker = require('./checker')
 module.exports = () => {
     let failded_attempts = 0;
     function solve(grid, row, col) {
-        // console.log(grid)
 
         let coord = findEmptyBlock(grid,row,col)
         row = coord[0]

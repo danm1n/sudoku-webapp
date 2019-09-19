@@ -1,4 +1,6 @@
-module.exports = (generate, solver) => {
+const CheckSolution = require('../src/user/checkuserBoard')
+const user = CheckSolution()
+module.exports = (generate) => {
 
     let all = (req, res) => {
         let mode = req.params.mode;
@@ -19,14 +21,20 @@ module.exports = (generate, solver) => {
     };
 
     let checker = (req, res) => {
-        console.log('test')
         let grid = req.body.grid;
-        console.log(grid)
-        if(solver.solve(grid,0,0)){
-
+        if(user.checkSolution(grid)){
+            res.json({
+                status: 'success',
+                data: ['You won, well done!','New Game','/']
+            });
+        }else{
+            res.json({
+                status: 'success',
+                data: ['Looks like your numbers clash.','Try Again']
+            });
         }
-        res.redirect('/')
     }
+
         return {
             all,
             checker
