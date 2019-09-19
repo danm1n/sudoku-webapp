@@ -11,6 +11,7 @@ export default class GenerateGame extends React.Component {
       grid: [],
       level: props.level,
       response: '',
+      popup: '',
     }
   }
 
@@ -50,14 +51,14 @@ export default class GenerateGame extends React.Component {
   }
 
   handleSubmit = event => {
+    this.setState({popup: ''})  
     event.preventDefault();
-
+    this.setState({popup: 'modal'})  
     const { grid } =
       this.state
     axios.post(`/check`, { grid })
       .then(res => {
         this.setState({response: res.data.data})
-        this.setState({popup: 'd-block'})
         console.log(this.state)
       })
   }
@@ -89,7 +90,7 @@ export default class GenerateGame extends React.Component {
         {this.makeTable()}
     </table>
     <div className="row justify-content-center">
-    <button data-toggle="modal" data-target="#exampleModal" className="btn btn-warning btn-md button" type="submit">Check</button>
+    <button data-toggle={this.state.popup} data-target="#exampleModal" className="btn btn-warning btn-md button" type="submit">Check</button>
     </div>
     </form>
     </div>
