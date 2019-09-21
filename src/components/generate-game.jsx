@@ -51,9 +51,8 @@ export default class GenerateGame extends React.Component {
   }
 
   handleSubmit = event => {
-    this.setState({popup: ''})  
     event.preventDefault();
-    this.setState({popup: 'modal'})  
+    document.querySelectorAll('#exampleModal').style.display = "block"
     const { grid } =
       this.state
     axios.post(`/check`, { grid })
