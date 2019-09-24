@@ -15,7 +15,7 @@ let local = process.env.LOCAL || false;
 if (process.env.DATABASE_URL && !local){
     useSSL = true;
 }
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:mint1213@localhost:5432/greetings';
+const connectionString = process.env.DATABASE_URL || 'postgresql://dan:mint1213@localhost:5432/testdb';
 
 const pool = new Pool({
   connectionString,
