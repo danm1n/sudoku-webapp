@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styling/App.css';
 
 
@@ -18,7 +19,7 @@ export default class Login extends React.Component {
       <input type="checkbox" value="remember-me"/> Remember me
     </label>
   </div>
-  <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <Link to="/home"><button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></Link>
   {/* <p className="mt-5 mb-3 text-muted">© 2017-2019</p> */}
 </form>
     )  
