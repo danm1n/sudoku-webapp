@@ -25,7 +25,7 @@ module.exports = (generate) => {
         if(user.checkSolution(grid)){
             res.json({
                 status: 'success',
-                data: ['You won, well done!','New Game','/']
+                data: ['You won, well done!','New Game','/home']
             });
         }else{
             res.json({
