@@ -51,9 +51,9 @@ export default class GenerateGame extends React.Component {
   }
 
   handleSubmit = event => {
-    this.setState({popup: ''})  
     event.preventDefault();
-    this.setState({popup: 'modal'})  
+    document.querySelector('#exampleModal').classList.add('show');
+    document.querySelector('#exampleModal').style.display = "block";
     const { grid } =
       this.state
     axios.post(`/check`, { grid })
@@ -61,6 +61,11 @@ export default class GenerateGame extends React.Component {
         this.setState({response: res.data.data})
         console.log(this.state)
       })
+  }
+
+  closeModal = () => {
+    document.querySelector('#exampleModal').classList.remove('show');
+    document.querySelector('#exampleModal').style.display = "none";
   }
 
 
@@ -73,7 +78,7 @@ export default class GenerateGame extends React.Component {
     <div className="modal-content">
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">{this.state.response[0]}</h5>
-        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" className="close" aria-label="Close" onClick={this.closeModal}>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -90,7 +95,7 @@ export default class GenerateGame extends React.Component {
         {this.makeTable()}
     </table>
     <div className="row justify-content-center">
-    <button data-toggle={this.state.popup} data-target="#exampleModal" className="btn btn-warning btn-md button" type="submit">Check</button>
+    <button className="btn btn-warning btn-md button" type="submit">Check</button>
     </div>
     </form>
     </div>
