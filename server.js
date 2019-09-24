@@ -9,6 +9,10 @@ const Pool = pg.Pool;
 const Sudoku = require('./src/sudoku/sudoku');
 const Routes = require('./routes/sudoku_routes');
 const Sudoku_Api = require('./api/sudoku_api');
+const User_Api = require('./api/user_api');
+
+const Signup = require('./src/user/signup');
+const Login = require('./src/user/login');
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -32,9 +36,12 @@ app.use(express.static('build'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const signup = Signup(pool);
+const login = Login(pool);
 const sudoku = Sudoku();
-const sudoku_api = Sudoku_Api(sudoku)
-Routes(app,sudoku_api)
+const user_api = User_Api(login,signup);
+const sudoku_api = Sudoku_Api(sudoku);
+Routes(app,sudoku_api,user_api)
 
 let PORT = process.env.PORT || 4732;
 
