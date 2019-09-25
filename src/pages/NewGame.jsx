@@ -10,15 +10,13 @@ export default class NewGame extends React.Component {
     
     render() {
     return (
-        <div>
+        <div className="bg">
             <NavBar />
-        <div className="">
         <div className="container">
             <div className="row justify-content-center">
             <GenerateGame level={this.state.level}/>
             </div>
         </div>
-      </div>
       </div>
     )  
 }

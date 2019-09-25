@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import logo from './logo.gif';
 import '../styling/App.css';
+import '../styling/index.css';
 import NavBar from '../components/nav-bar'
 import logo from '../styling/images/logo.gif';
 
@@ -18,7 +19,7 @@ export default class HomePage extends React.Component {
 
   render() {
   return (
-    <div>
+    <div className="bg">
       <NavBar />
       <div className="container">
         <div className="row justify-content-center">

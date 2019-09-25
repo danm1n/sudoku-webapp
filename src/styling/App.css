@@ -44,6 +44,10 @@
   height:20%;
 }
 
+.navCol {
+  background-color: rgba(0, 0, 0, 0.548)
+}
+
 /* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -56,6 +60,7 @@
 table {
   margin-top:1em;
   color: black;
+  background-color: greenyellow;
 }
 td {
   height:30px;
@@ -91,5 +96,5 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .exists{
-  background-color: rgb(255, 219, 175);
+  background-color: rgb(255, 255, 255);
 }
