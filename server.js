@@ -1,6 +1,7 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
+const config = require('./config/config')
 const app = express();
 const session = require('express-session');
 const pg = require("pg");
@@ -19,7 +20,7 @@ let local = process.env.LOCAL || false;
 if (process.env.DATABASE_URL && !local){
     useSSL = true;
 }
-const connectionString = process.env.DATABASE_URL || 'postgresql://dan:mint1213@localhost:5432/testdb';
+const connectionString = process.env.DATABASE_URL || config.database;
 
 const pool = new Pool({
   connectionString,

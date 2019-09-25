@@ -7,7 +7,7 @@ export default class Signup extends React.Component {
      
     render() {
     return (
-        <form className="form-signin" method="POST" action="/login">
+        <form className="form-signin" method="POST" action="/signup">
   <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
   <h1 className="h3 mb-3 font-weight-normal">Signup</h1>
   <label for="inputName" className="sr-only">Name</label>
