@@ -61,7 +61,6 @@ function intialBoard(level){
 }
 
     function resetG(){
-        console.log(grid)
         for(var row = 0; row < grid.length; row++){
             for(var col = 0; col < grid.length;col++){
                 grid[row][col] = 0;
