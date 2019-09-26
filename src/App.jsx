@@ -14,8 +14,8 @@ export default class App extends React.Component {
     <HashRouter>
     <Switch>
     <Route exact path="/signup" component={Signup} />
-    <Route exact path="/" component={Login} />
-      <Route exact path="/home" component={HomePage} />
+    <Route exact path="/login" component={Login} />
+      <Route exact path="/" component={HomePage} />
       <Route path="/new-game/:handle" component={NewGame} />
     </Switch>
     </HashRouter>
