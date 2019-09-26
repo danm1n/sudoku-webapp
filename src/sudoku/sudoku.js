@@ -40,7 +40,7 @@ module.exports = () => {
 
 function intialBoard(level){
     let rounds = 0;
-    resetGrid()
+    resetG()
     populateGrid()
     sudoku_Solver.solve(grid,row, col)
     let answer = JSON.stringify(grid)
@@ -60,7 +60,8 @@ function intialBoard(level){
     return [grid,JSON.parse(answer)]
 }
 
-    function resetGrid(){
+    function resetG(){
+        console.log(grid)
         for(var row = 0; row < grid.length; row++){
             for(var col = 0; col < grid.length;col++){
                 grid[row][col] = 0;
@@ -70,5 +71,7 @@ function intialBoard(level){
 
     return {
         intialBoard,
+        populateGrid,
+        resetG
     }
 }
