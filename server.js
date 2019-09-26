@@ -8,7 +8,6 @@ const pg = require("pg");
 const Pool = pg.Pool;
 
 const Sudoku = require('./src/sudoku/sudoku');
-const ResetGrid = require('./src/sudoku/resetGrid')
 const Routes = require('./routes/sudoku_routes');
 const Sudoku_Api = require('./api/sudoku_api');
 const User_Api = require('./api/user_api');
@@ -41,7 +40,6 @@ app.use(bodyParser.json());
 const signup = Signup(pool);
 const login = Login(pool);
 const sudoku = Sudoku();
-ResetGrid(sudoku)
 const user_api = User_Api(login,signup);
 const sudoku_api = Sudoku_Api(sudoku);
 Routes(app,sudoku_api,user_api)

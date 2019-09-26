@@ -1,4 +1,4 @@
-module.exports = (sudoku) => {
+module.exports = () => {
 
 sudoku.resetG()
 sudoku.populateGrid()

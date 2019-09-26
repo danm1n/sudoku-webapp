@@ -5,7 +5,7 @@ module.exports = () => {
     function solve(grid, row, col) {
         // attempts()
         if(failded_attempts >= 15000){
-            resetGrid()
+            // resetGrid()
         }
         let coord = findEmptyBlock(grid,row,col)
         row = coord[0]
