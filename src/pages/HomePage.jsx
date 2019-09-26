@@ -9,7 +9,7 @@ import logo from '../styling/images/logo.gif';
 
 export default class HomePage extends React.Component {
   state ={
-    selected: ""
+    selected: "easy"
   }
 
   handleChange = event => {
