@@ -29,8 +29,8 @@ export default class HomePage extends React.Component {
           <div className="button">
             <div class="input-group">
               <select class="custom-select" onClick={this.handleChange}>
-                <option selected>Choose Level</option>
-                <option value="easy">Easy</option>
+                {/* <option >Choose Level</option> */}
+                <option selected value="easy">Easy</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="hard">Hard</option>
                 <option value="expert">Expert</option>
