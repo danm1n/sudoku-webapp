@@ -95,7 +95,7 @@ export default class GenerateGame extends React.Component {
         {this.makeTable()}
     </table>
     <div className="row justify-content-center">
-    <button className="btn btn-warning btn-md button" type="submit">Check</button>
+    <button id="checkBtn" className="btn btn-warning btn-md button" type="submit">Check</button>
     </div>
     </form>
     </div>

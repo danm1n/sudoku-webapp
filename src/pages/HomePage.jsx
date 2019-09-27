@@ -36,7 +36,7 @@ export default class HomePage extends React.Component {
                 <option value="expert">Expert</option>
               </select>
               <div class="input-group-append">
-              <Link to={`/new-game/${this.state.selected}`}><button class="btn btn-warning btm-md">Start Game</button></Link>
+              <Link id="startBtn" to={`/new-game/${this.state.selected}`}><button class="btn btn-warning btm-md">Start Game</button></Link>
               </div>
             </div>
           </div>
