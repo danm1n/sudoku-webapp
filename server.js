@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const config = require('./config/config')
 const app = express();
 const session = require('express-session');
+require('dotenv').config()
 const pg = require("pg");
 const Pool = pg.Pool;
 

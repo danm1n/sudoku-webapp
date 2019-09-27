@@ -1,4 +1,6 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const config = require('../config/config')
 const saltRounds = 10;
 module.exports = (login, signup) => {
     
@@ -19,18 +21,31 @@ module.exports = (login, signup) => {
     
     let auth = async (req,res) => {
         let {inputEmail, inputPassword} = req.body
-        
+        console.log(inputEmail)
         const user = await login.authUser(inputEmail);
+        // console.log()
         if (user) {
             const match = await bcrypt.compare(inputPassword, user.password);
             if (match === true) {
-            res.redirect('/#/home')
+                    const token = jwt.sign({username: user.username}, config.secret, { expiresIn: config.tokenLife})
+                    res.json({
+                        status: 'success',
+                        data: 'Token created',
+                        token,
+                    });
             }else{
                 res.json({
                     data: "Login details incorrect."
                 })
             } 
         }
+    }
+
+    const userData = async (req,res) => {
+        // const user = await login.authUser();
+        res.json({
+            status: 'success',
+        });
     }
 
    
