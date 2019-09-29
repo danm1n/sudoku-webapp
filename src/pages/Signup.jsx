@@ -6,11 +6,13 @@ export default class Signup extends React.Component {
      
     render() {
     return (
+        <div className="bg form-place">
         <form className="form-signin" method="POST" action="/signup">
   <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
   <h1 className="h3 mb-3 font-weight-normal">Signup</h1>
   <label for="inputName" className="sr-only">Name</label>
   <input name="inputName" type="text" id="inputName" className="form-control" placeholder="Enter Name" required="" autofocus=""/>
+  
   <label for="inputEmail" className="sr-only">Email address</label>
   <input name="inputEmail" type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autofocus=""/>
   <label for="inputPassword" className="sr-only">Password</label>
@@ -22,6 +24,7 @@ export default class Signup extends React.Component {
  <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
   {/* <p className="mt-5 mb-3 text-muted">© 2017-2019</p> */}
 </form>
+</div>
     )  
 }
 }

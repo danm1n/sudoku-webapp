@@ -1,25 +1,16 @@
-import React from 'react';
-import { HashRouter,Route, Switch } from 'react-router-dom';
-
-import HomePage from './pages/HomePage';
-import NewGame from './pages/NewGame';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import React, { Component } from 'react';
+import './styling/App.css';
+import Router from './Router';
 
 
-export default class App extends React.Component {
-
-  render () {
-  return (
-    <HashRouter>
-    <Switch>
-    <Route exact path="/signup" component={Signup} />
-    <Route exact path="/login" component={Login} />
-      <Route exact path="/" component={HomePage} />
-      <Route path="/new-game/:handle" component={NewGame} />
-    </Switch>
-    </HashRouter>
-  )
-}
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+          <Router/>
+      </div>
+    );
+  }
 }
 
+export default App;

@@ -41,6 +41,10 @@ module.exports = (login, signup) => {
         }
     }
 
+    const check = (req,res) => {
+
+    }
+
     const userData = async (req,res) => {
         // const user = await login.authUser();
         res.json({
@@ -51,6 +55,7 @@ module.exports = (login, signup) => {
    
     return{
         createUser,
+        check,
         auth
     }
 }

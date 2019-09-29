@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styling/App.css';
+import '../styling/index.css'
 
 
 export default class Login extends React.Component {
@@ -40,6 +41,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
+      <div className="bg form-place">
       <form className="form-signin" onSubmit={this.handleSubmit}>
         <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -56,6 +58,7 @@ export default class Login extends React.Component {
         <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         {/* <p className="mt-5 mb-3 text-muted">© 2017-2019</p> */}
       </form>
+      </div>
     )
   }
 }

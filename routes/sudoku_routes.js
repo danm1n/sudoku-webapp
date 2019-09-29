@@ -10,6 +10,7 @@ module.exports = (app, sudoku_api,user_api) => {
     app.get('/signup', (req,res) => {
         res.redirect('/#/signup')
     });
+    app.post('/check', user_api.check)
     app.get('/api/new-game/:mode', sudoku_api.all)
     app.use((req, res) => {
         res.redirect('/');
