@@ -14,7 +14,7 @@ const Router = (props) => (
     <Switch>
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/login" component={Login} />
-      <PrivateRoute exact path="/home" component={HomePage} />
+      <PrivateRoute exact path="/" component={HomePage} />
       <PrivateRoute path="/new-game/:handle" component={NewGame} />
     </Switch>
     </HashRouter>
