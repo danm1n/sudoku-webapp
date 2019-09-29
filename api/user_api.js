@@ -37,11 +37,19 @@ module.exports = (login, signup) => {
                 res.json({
                     data: "Login details incorrect."
                 })
-            } 
+            }
         }
     }
 
     const check = (req,res) => {
+        let { token } = req.body
+        // console.log(token)
+        var verifiedJwt = jwt.verify(token,config.secret);
+        console.log(verifiedJwt)
+        res.json({
+            status:'success',
+            token
+        })
 
     }
 
