@@ -35,7 +35,8 @@ module.exports = (login, signup) => {
                     });
             }else{
                 res.json({
-                    data: "Login details incorrect."
+                    status: 'faliure',
+                    data: "Login details incorrect.",
                 })
             }
         }
@@ -44,13 +45,18 @@ module.exports = (login, signup) => {
     const check = (req,res) => {
         let { token } = req.body
         // console.log(token)
+        if(token){
         var verifiedJwt = jwt.verify(token,config.secret);
         console.log(verifiedJwt)
         res.json({
             status:'success',
-            token
-        })
-
+            response: true
+        });
+    }else{
+        res.json({
+            status:'No Token',
+        });
+    }
     }
 
     const userData = async (req,res) => {

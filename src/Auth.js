@@ -13,14 +13,17 @@ const Auth = {
                 jwt.token = cookie[1];
             }
         }
-        console.log(`token:${jwt.token}`)
+        // console.log(`token:${jwt.token}`)
+        if(jwt !== ""){
         axios.post(`/checker`, jwt)
         .then(res => {
-
+            this.isAuthenticated = res.data.response
         })
+    }
     },
     getAuth() {
         this.check()
+        console.log(this.isAuthenticated)
         return this.isAuthenticated;
       }
   };

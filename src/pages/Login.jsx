@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styling/App.css';
 import '../styling/index.css'
@@ -19,8 +19,7 @@ export default class Login extends React.Component {
       inputEmail: this.state.username,
       inputPassword: this.state.password
     }
-    // formData.append('inputEmail', username);
-    // formData.append('inputPassword', password);
+
     axios.post(`/login`, form)
       .then(res => {
         document.cookie = `sudo=${res.data.token}`
@@ -29,6 +28,7 @@ export default class Login extends React.Component {
       .catch(error => {
         console.log(error)
       })
+      return <Redirect to='/#/'/>
   }
 
   handleChange = event => {
