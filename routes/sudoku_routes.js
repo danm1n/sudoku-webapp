@@ -4,7 +4,7 @@ module.exports = (app, sudoku_api,user_api) => {
     app.get('/', (req, res) => {res.sendFile('index.html')});
     app.post('/login', user_api.sign_in)
     app.post('/signup', user_api.createUser)
-    app.post('/check', sudoku_api.checker)
+    app.post('/api/check',checkToken, sudoku_api.checker)
     app.get('/login', (req,res) => {
         res.redirect('/#/login')
     });

@@ -62,7 +62,12 @@ export default class GenerateGame extends React.Component {
     document.querySelector('#exampleModal').style.display = "block";
     const { grid } =
       this.state
-    axios.post(`/check`, { grid })
+      let config = {
+        headers: {
+         'Authorization': `bearer:${Auth.getToken()}`
+        }
+      }
+    axios.post(`/api/check`, { grid },config)
       .then(res => {
         this.setState({response: res.data.data})
       })
