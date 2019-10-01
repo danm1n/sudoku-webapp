@@ -19,7 +19,7 @@ module.exports = (login, signup) => {
         }
     }
     
-    let auth = async (req,res) => {
+    let sign_in = async (req,res) => {
         let {inputUsername, inputPassword} = req.body
         const user = await login.authUser(inputUsername);
         console.log(user)
@@ -41,7 +41,7 @@ module.exports = (login, signup) => {
         }
     }
 
-    const check = (req,res) => {
+    const verify = (req,res) => {
         let { token } = req.body
         if(token){
         var verifiedJwt = jwt.verify(token,config.secret);
@@ -68,7 +68,7 @@ module.exports = (login, signup) => {
    
     return{
         createUser,
-        check,
-        auth
+        verify,
+        sign_in
     }
 }

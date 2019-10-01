@@ -15,7 +15,7 @@ const Auth = {
             }
         }
         if(jwt !== ""){
-       await axios.post(`/checker`, jwt)
+       await axios.post(`/verify`, jwt)
         .then(res => {
             this.isAuthenticated = res.data.response
             this.token = jwt.token
