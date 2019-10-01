@@ -59,7 +59,6 @@ export default class GenerateGame extends React.Component {
     axios.post(`/check`, { grid })
       .then(res => {
         this.setState({response: res.data.data})
-        console.log(this.state)
       })
   }
 

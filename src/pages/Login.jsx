@@ -3,32 +3,37 @@ import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styling/App.css';
 import '../styling/index.css'
+import Auth from '../Auth'
 
 
 export default class Login extends React.Component {
 
   state = {
     username: "",
-    password: ""
+    password: "",
+    auth: Auth.getAuth()
   }
 
-  handleSubmit = event => {
+ async checkAuthorization(){
+  await Auth.check()
+  this.setState({auth : Auth.getAuth()})
+  }
+
+  handleSubmit = async event => {
     event.preventDefault();
-    // const formData = new FormData();
     const form = {
       inputEmail: this.state.username,
       inputPassword: this.state.password
     }
 
-    axios.post(`/login`, form)
+   await axios.post(`/login`, form)
       .then(res => {
         document.cookie = `sudo=${res.data.token}`
-        console.log(res.data)
       })
       .catch(error => {
         console.log(error)
       })
-      return <Redirect to='/#/'/>
+      await this.checkAuthorization()
   }
 
   handleChange = event => {
@@ -40,6 +45,9 @@ export default class Login extends React.Component {
   }
 
   render() {
+    if(this.state.auth){
+      return <Redirect to='/'/>
+    }
     return (
       <div className="bg form-place">
       <form className="form-signin" onSubmit={this.handleSubmit}>

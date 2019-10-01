@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const Auth = {
     isAuthenticated: false,
-    check()  {
+   async check()  {
         let jwt = {
             token: "",
         }
@@ -13,17 +13,14 @@ const Auth = {
                 jwt.token = cookie[1];
             }
         }
-        // console.log(`token:${jwt.token}`)
         if(jwt !== ""){
-        axios.post(`/checker`, jwt)
+       await axios.post(`/checker`, jwt)
         .then(res => {
             this.isAuthenticated = res.data.response
         })
     }
     },
-    getAuth() {
-        this.check()
-        console.log(this.isAuthenticated)
+   getAuth() {
         return this.isAuthenticated;
       }
   };
