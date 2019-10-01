@@ -10,6 +10,7 @@ const Pool = pg.Pool;
 
 const Sudoku = require('./src/sudoku/sudoku');
 const Routes = require('./routes/sudoku_routes');
+const Game_Score = require('./src/user/game-score');
 const Sudoku_Api = require('./api/sudoku_api');
 const User_Api = require('./api/user_api');
 
@@ -41,8 +42,9 @@ app.use(bodyParser.json());
 const signup = Signup(pool);
 const login = Login(pool);
 const sudoku = Sudoku();
+const game_score = Game_Score(pool);
 const user_api = User_Api(login,signup);
-const sudoku_api = Sudoku_Api(sudoku);
+const sudoku_api = Sudoku_Api(sudoku,game_score);
 Routes(app,sudoku_api,user_api)
 
 let PORT = process.env.PORT || 4732;

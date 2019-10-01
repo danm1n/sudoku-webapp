@@ -1,6 +1,6 @@
 const CheckSolution = require('../src/user/checkuserBoard')
 const user = CheckSolution()
-module.exports = (generate) => {
+module.exports = (generate,game_score) => {
 
     let all = (req, res) => {
         console.log(req.user)
@@ -24,6 +24,7 @@ module.exports = (generate) => {
     let checker = (req, res) => {
         let grid = req.body.grid;
         if(user.checkSolution(grid)){
+            game_score.increaseScore(req.user)
             res.json({
                 status: 'success',
                 data: ['You won, well done!','New Game','/home']
@@ -36,8 +37,17 @@ module.exports = (generate) => {
         }
     }
 
+    let highscore = async (req,res) => {
+            res.json({
+                status: 'success',
+                data: await game_score.highscore_table()
+            });
+        }        
+    
+
         return {
             all,
-            checker
+            checker,
+            highscore
         }
 }

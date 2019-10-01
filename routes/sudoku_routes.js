@@ -13,6 +13,7 @@ module.exports = (app, sudoku_api,user_api) => {
     });
     app.post('/verify', user_api.verify)
     app.get('/api/new-game/:mode', checkToken, sudoku_api.all)
+    app.get('/api/users/highscore', sudoku_api.highscore)
     app.use((req, res) => {
         res.redirect('/');
     });

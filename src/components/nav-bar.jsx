@@ -16,7 +16,7 @@ export default function NavBar() {
         <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="#">More</Link>
+        <Link className="nav-link" to="/highscore">HighScores</Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="#">About</Link>
