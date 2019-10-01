@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const Auth = {
     isAuthenticated: false,
+    token: "",
    async check()  {
         let jwt = {
             token: "",
@@ -17,8 +18,12 @@ const Auth = {
        await axios.post(`/checker`, jwt)
         .then(res => {
             this.isAuthenticated = res.data.response
+            this.token = jwt.token
         })
     }
+    },
+    getToken(){
+        return this.token
     },
    getAuth() {
         return this.isAuthenticated;

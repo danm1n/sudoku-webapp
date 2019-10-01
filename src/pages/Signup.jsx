@@ -13,8 +13,8 @@ export default class Signup extends React.Component {
   <label for="inputName" className="sr-only">Name</label>
   <input name="inputName" type="text" id="inputName" className="form-control" placeholder="Enter Name" required="" autofocus=""/>
   
-  <label for="inputEmail" className="sr-only">Email address</label>
-  <input name="inputEmail" type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autofocus=""/>
+  <label for="inputUsername" className="sr-only">Username</label>
+  <input name="inputUsername" type="text" id="inputUsername" className="form-control" placeholder="Username" required="" autofocus=""/>
   <label for="inputPassword" className="sr-only">Password</label>
   <input name="inputPassword" type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styling/App.css';
+import Auth from '../Auth'
 
 
 export default class GenerateGame extends React.Component {
@@ -16,8 +17,13 @@ export default class GenerateGame extends React.Component {
   }
 
   componentDidMount() {
+    let config = {
+      headers: {
+       'Authorization': `bearer:${Auth.getToken()}`
+      }
+    }
     let level = this.state.level
-    axios.get(`/api/new-game/${level}`)
+    axios.get(`/api/new-game/${level}`, config)
       .then(res => {
         const grid = res.data.data;
         this.setState({ grid });
