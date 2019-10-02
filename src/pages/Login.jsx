@@ -28,7 +28,7 @@ export default class Login extends React.Component {
 
    await axios.post(`/login`, form)
       .then(res => {
-        document.cookie = `sudo=${res.data.token}`
+        localStorage.setItem('sudo', res.data.token)
       })
       .catch(error => {
         console.log(error)

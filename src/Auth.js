@@ -8,13 +8,7 @@ const Auth = {
         let jwt = {
             token: "",
         }
-        let cookies = document.cookie.split(';')
-        for (let cookie of cookies) {
-            if (cookie.startsWith(' su')) {
-                cookie = cookie.split('=')
-                jwt.token = cookie[1];
-            }
-        }
+        jwt.token = localStorage.getItem('sudo')
         if (jwt !== "") {
             await axios.post(`/verify`, jwt)
                 .then(res => {
