@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { HashRouter,Switch, Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import NewGame from './pages/NewGame';
@@ -10,17 +10,17 @@ import Auth from './Auth';
 import HighScore from './pages/HighScore';
 
 const Router = (props) => (
-  
-    <HashRouter>
+
+  <HashRouter>
     <Switch>
-    <Route exact path="/signup" component={Signup} />
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/highscore" component={HighScore} />
+      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/highscore" component={HighScore} />
       <PrivateRoute exact path="/" component={HomePage} />
       <PrivateRoute path="/new-game/:handle" component={NewGame} />
     </Switch>
-    </HashRouter>
-  
+  </HashRouter>
+
 )
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -30,12 +30,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       Auth.getAuth() ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/login"
-          }}
-        />
-      )
+          <Redirect
+            to={{
+              pathname: "/login"
+            }}
+          />
+        )
     }
   />
 );

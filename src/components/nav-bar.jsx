@@ -5,8 +5,13 @@ import Auth from '../Auth'
 
 export default class NavBar extends React.Component {
   state = {
-    username: Auth.getUserName()
+    username: Auth.getUserName(),
   }
+
+  signout(){
+    Auth.signOutUser()
+  }
+
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark navCol">
@@ -32,7 +37,7 @@ export default class NavBar extends React.Component {
   </button>
   <div class="dropdown-menu dropdown-menu-right">
     <button class="dropdown-item" type="button">Edit Profile</button>
-    <button class="dropdown-item" type="button">Sign Out</button>
+    <button class="dropdown-item" type="button" onClick={this.signout}>Sign Out</button>
   </div>
 </div>
   </div>

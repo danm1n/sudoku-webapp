@@ -26,6 +26,10 @@ const Auth = {
     },
     getUserName() {
         return this.isUsername
+    },
+   signOutUser(){
+        localStorage.removeItem('sudo')
+        return false;
     }
 
 };

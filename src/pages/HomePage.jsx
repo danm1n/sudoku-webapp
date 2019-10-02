@@ -5,11 +5,12 @@ import '../styling/App.css';
 import '../styling/index.css';
 import NavBar from '../components/nav-bar'
 import logo from '../styling/images/logo.gif';
+import Auth from '../Auth'
 
 
 export default class HomePage extends React.Component {
   state ={
-    selected: "easy"
+    selected: "easy",
   }
 
   handleChange = event => {
