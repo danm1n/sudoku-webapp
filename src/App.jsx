@@ -9,24 +9,25 @@ class App extends Component {
     auth: false,
     loading: true
   }
- async componentDidMount() {
-    this.setState({auth: await Auth.check(), loading: false})
+  async componentDidMount() {
+    this.setState({ auth: await Auth.check(), loading: false })
   }
   render() {
-    if(this.state.loading){
-      return(
-        <div className= "container"> 
-        <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
-          <span className="sr-only">Loading...</span>
+    if (this.state.loading) {
+      return (
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h2 class="display-4">Sudoku Webapp<p class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </p></h2>
+            <p>If loading persists, <a href="/">Click Me</a></p>
+          </div>
         </div>
-      </div>
-      </div>
       )
     }
     return (
       <div className="App">
-          <Router/>
+        <Router />
       </div>
     );
   }
