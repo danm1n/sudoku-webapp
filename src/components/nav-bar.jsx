@@ -27,7 +27,7 @@ export default class NavBar extends React.Component {
       </li>
     </ul>
     <div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Welcome, {this.state.username}
   </button>
   <div class="dropdown-menu dropdown-menu-right">
