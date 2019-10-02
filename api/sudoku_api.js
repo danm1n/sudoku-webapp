@@ -3,7 +3,6 @@ const user = CheckSolution()
 module.exports = (generate,game_score) => {
 
     let all = (req, res) => {
-        console.log(req.user)
         let mode = req.params.mode;
         try {
             let genPuzzle = generate.intialBoard(mode);
