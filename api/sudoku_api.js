@@ -27,7 +27,7 @@ module.exports = (generate,game_score) => {
             game_score.increaseScore(req.user)
             res.json({
                 status: 'success',
-                data: ['You won, well done!','New Game','/home']
+                data: ['You won, well done!','New Game','/']
             });
         }else{
             res.json({
