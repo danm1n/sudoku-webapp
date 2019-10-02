@@ -17,6 +17,7 @@
 }
 .form-signin .form-control {
   position: relative;
+  margin:2px;
   box-sizing: border-box;
   height: auto;
   padding: 10px;

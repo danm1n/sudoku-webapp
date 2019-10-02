@@ -44,11 +44,12 @@ module.exports = (login, signup) => {
     const verify = (req,res) => {
         let { token } = req.body
         if(token){
-        var verifiedJwt = jwt.verify(token,config.secret);
+        let verifiedJwt = jwt.verify(token,config.secret);
         //--------------add try and catch
         res.json({
-            status:'success',
-            response: true
+            status:'Token Verified',
+            response: true,
+            client_id: verifiedJwt.username
         });
     }else{
         res.json({
