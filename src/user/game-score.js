@@ -9,7 +9,6 @@ module.exports = (pool) => {
     const highscore_table = async () => {
         let table = await pool.query('SELECT username,highscore FROM users ORDER BY highscore DESC')
         let mtable = table.rows
-        console.log(mtable)
         return mtable;
     }
 

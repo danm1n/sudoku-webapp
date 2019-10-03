@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import NewGame from './pages/NewGame';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import About from './pages/About'
 
 import Auth from './Auth';
 import HighScore from './pages/HighScore';
@@ -16,6 +17,7 @@ const Router = (props) => (
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/highscore" component={HighScore} />
+      <Route exact path="/about" component={About} />
       <PrivateRoute exact path="/" component={HomePage} />
       <PrivateRoute path="/new-game/:handle" component={NewGame} />
     </Switch>

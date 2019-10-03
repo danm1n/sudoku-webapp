@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 module.exports = (req, res, next) => {
-    let header = req.headers['authorization'];
-    let bearer = header.split(':')
     try {
+        let header = req.headers['authorization'];
         if (typeof header !== 'undefined') {
+        let bearer = header.split(':')
             var username = jwt.verify(bearer[1], config.secret).username;
             req.user = username
             req.token = bearer[1]
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     } catch (err) {
         res.json({
             status: "error",
-            error: err
+            error: err.stack
         })
     }
 }

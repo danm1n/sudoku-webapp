@@ -1,18 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styling/App.css';
-import Auth from '../Auth'
+import Auth from '../Auth';
+import App from '../App';
 
 export default class NavBar extends React.Component {
   state = {
     username: Auth.getUserName(),
+    redirect: false
   }
 
-  signout(){
+  signout = () => {
     Auth.signOutUser()
+    this.setState({redirect : true})
   }
 
   render() {
+    if(this.state.redirect){
+      return <App />
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark navCol">
   <Link className="navbar-brand" to="/">Sudoku</Link>
@@ -28,7 +34,7 @@ export default class NavBar extends React.Component {
         <Link className="nav-link" to="/highscore">HighScores</Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="#">About</Link>
+        <Link className="nav-link" to="/about">About</Link>
       </li>
     </ul>
     <div class="btn-group">

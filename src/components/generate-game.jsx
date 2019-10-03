@@ -13,6 +13,7 @@ export default class GenerateGame extends React.Component {
       level: props.level,
       response: '',
       popup: '',
+      btnStatus: false
     }
   }
 
@@ -56,7 +57,7 @@ export default class GenerateGame extends React.Component {
     this.setState({ grid });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     document.querySelector('#exampleModal').classList.add('show');
     document.querySelector('#exampleModal').style.display = "block";
@@ -67,10 +68,13 @@ export default class GenerateGame extends React.Component {
          'Authorization': `bearer:${Auth.getToken()}`
         }
       }
-    axios.post(`/api/check`, { grid },config)
+   await axios.post(`/api/check`, { grid },config)
       .then(res => {
         this.setState({response: res.data.data})
       })
+      if(this.state.response[0] === "You won, well done!"){
+        this.setState({btnStatus:true})
+      }
   }
 
   closeModal = () => {
@@ -105,7 +109,8 @@ export default class GenerateGame extends React.Component {
         {this.makeTable()}
     </table>
     <div className="row justify-content-center">
-    <button id="checkBtn" className="btn btn-warning btn-md button" type="submit">Check</button>
+    <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.btnStatus}>Check</button>
+    <Link to="/"><button type="button" className="btn btn-warning btn-md button">New Game</button></Link>
     </div>
     </form>
     </div>
