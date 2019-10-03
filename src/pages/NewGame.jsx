@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styling/App.css';
-import GenerateGame from '../components/generate-game';
+import ClassicGame from '../components/classic-game';
 import NavBar from '../components/nav-bar';
 
 export default class NewGame extends React.Component {
@@ -14,7 +14,7 @@ export default class NewGame extends React.Component {
             <NavBar />
         <div className="container">
             <div className="row justify-content-center">
-            <GenerateGame level={this.state.level}/>
+            <ClassicGame level={this.state.level}/>
             </div>
         </div>
       </div>
