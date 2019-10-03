@@ -51,7 +51,6 @@ export default class Login extends React.Component {
     return (
       <div className="bg form-place">
       <form className="form-signin" onSubmit={this.handleSubmit}>
-        <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputUsername" className="sr-only">Username</label>
         <input name="inputUsername" onChange={this.handleChange} type="text" id="inputUsername" className="form-control" placeholder="Username" required autofocus="" />

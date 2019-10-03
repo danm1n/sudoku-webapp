@@ -50,7 +50,6 @@ export default class Signup extends React.Component {
         return (
             <div className="bg form-place">
                 <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <img className="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
                     <h1 className="h3 mb-3 font-weight-normal">Signup</h1>
                     <label for="inputName" className="sr-only">Name</label>
                     <input name="inputName" onChange={this.handleChange} type="text" id="inputName" className="form-control" placeholder="Enter Name" required autofocus="" />
