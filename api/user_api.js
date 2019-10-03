@@ -9,12 +9,25 @@ module.exports = (login, signup) => {
         let { inputName, inputUsername, inputPassword, confirmPassword } = req.body
         if (inputPassword === confirmPassword) {
             bcrypt.hash(req.body.inputPassword, saltRounds, async function (err, hash) {
-                await signup.createAccount(inputName, inputUsername, hash);
-            });
-            res.redirect('/')
+             let checkUser = await signup.createAccount(inputName, inputUsername, hash);
+            if(checkUser === true){
+                res.json({
+                    status: "success",
+                    createUser: checkUser,
+                    reason:"User account created."
+                });
+            }else{
+                res.json({
+                    status: "faliure",
+                    createUser: checkUser,
+                    reason:"Username already exists."
+                });
+            }
+        });
         } else {
             res.json({
-                data: "Passwords do not match."
+                status: "faliure",
+                reason: "Passwords do not match."
             })
         }
     }
@@ -34,9 +47,14 @@ module.exports = (login, signup) => {
             } else {
                 res.json({
                     status: 'faliure',
-                    data: "Login details incorrect.",
-                })
+                    data: "Password is incorrect.",
+                });
             }
+        } else {
+            res.json({
+                status: 'faliure',
+                data: "User does not exist.",
+            })
         }
     }
 
