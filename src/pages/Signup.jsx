@@ -62,7 +62,7 @@ export default class Signup extends React.Component {
                     <label for="confirmPassword" className="sr-only">Confirm Password</label>
                     <input name="confirmPassword" onChange={this.handleChange} type="password" id="inputPassword" className="form-control" placeholder="Confirm Password" required />
                     <span>{this.state.alert}</span>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                    <button className="btn btn-lg btn-warning btn-block" type="submit">Sign up</button>
                 </form>
             </div>
         )
