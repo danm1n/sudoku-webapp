@@ -1,5 +1,5 @@
 const checker = require('./checker')
-const resetGrid = require('./resetGrid')
+// const resetGrid = require('./resetGrid')
 module.exports = () => {
     let failded_attempts = 0;
     function solve(grid, row, col) {
@@ -51,10 +51,10 @@ function findEmptyBlock(grid,row,col){
     return coord;
 }
 
-function attempts(){
-    console.log(failded_attempts)
-    return failded_attempts;
-}
+// function attempts(){
+//     console.log(failded_attempts)
+//     return failded_attempts;
+// }
 
 function resetFailed(){
     failded_attempts = 0;
@@ -62,7 +62,7 @@ function resetFailed(){
 
 return{
     solve,
-    attempts,
+    // attempts,
     resetFailed
 }
 }

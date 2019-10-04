@@ -28,7 +28,6 @@ const app = express();
 describe('------------------', function () {
     const signup = Signup(pool);
     const login = Login(pool);
-    const sudoku = Sudoku();
     const game_score = Game_Score(pool);
     describe('Testing Webapp Functions', function (){
    
@@ -38,20 +37,26 @@ describe('------------------', function () {
 
     describe('Testing Sudoku Game Generator', function () {
         it('Should return a random generated, game which difficulty is [easy], width 9 arrays/rows', function () {
-            assert.deepEqual(sudoku.intialBoard('easy')[0].length, 9)
+            const sudoku = Sudoku();
+            let puzzle = sudoku.intialBoard('easy')
+            console.log(`length:${puzzle[0].length}`)
+            assert.deepEqual(puzzle[0].length, 9)
         });
         it('Should return a random generated, game which difficulty is [intermediate], width 9 arrays/rows', function () {
-            assert.deepEqual(sudoku.intialBoard('intermediate')[0].length, 9)
+            const sudoku = Sudoku();
+            let puzzle = sudoku.intialBoard('intermediate')
+            assert.deepEqual(puzzle[0].length, 9)
         });
         it('Should return a random generated, game which difficulty is [hard], width 9 arrays/rows', function () {
-            assert.deepEqual(sudoku.intialBoard('hard')[0].length, 9)
+            const sudoku = Sudoku();
+            let puzzle = sudoku.intialBoard('hard')
+            assert.deepEqual(puzzle[0].length, 9)
         });
         it('Should return a random generated, game which difficulty is [expert], width 9 arrays/rows', function () {
-            assert.deepEqual(sudoku.intialBoard('expert')[0].length, 9)
+            const sudoku = Sudoku();
+            let puzzle = sudoku.intialBoard('expert')
+            assert.deepEqual(puzzle[0].length, 9)
         });
-    });
-    describe('Testing Sudoku Game Checker', function () {
-    
     });
 });
 });

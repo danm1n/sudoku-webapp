@@ -57,7 +57,7 @@ describe('------------------', function () {
                 })
         });
         it('Should send sudoku puzzle to server and return a [looks like your numbers clash]', function (done) {
-            let form = {grid:[[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "1", "1", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "1"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]]}
+            let form = { grid: [[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "1", "1", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "1"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]] }
             supertest(app)
                 .post('/api/check')
                 .send(form)
@@ -69,7 +69,7 @@ describe('------------------', function () {
                 })
         });
         it('Should send sudoku puzzle to server and return a [You won, well done!]', function (done) {
-            let form = {grid:[[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "2", "5", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "6"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]]}
+            let form = { grid: [[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "2", "5", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "6"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]] }
             supertest(app)
                 .post('/api/check')
                 .send(form)
@@ -80,5 +80,19 @@ describe('------------------', function () {
                     done();
                 })
         });
+        describe('Should return highscores of all users.', function (done) {
+                supertest(app)
+                    .get('/api/users/highscore')
+                    .set('Accept', 'application/json, text/plain, */*')
+                    .end((err, res) => {
+                        console.log(res.body.data)
+                        expect(res.body.data).to.be.deep.equal(
+                            // [{ username: 'Test Account', highscore: 0 }]
+                        )
+                        expect(200, done);
+                        done();
+                    })
+            });
+
     });
 });

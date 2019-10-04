@@ -45,6 +45,24 @@ describe('----------------', function () {
     });
 
     describe('Testing User API', function () {
+
+        it('Should return a status of 302 as /signup is a route', function (done) {
+            supertest(app)
+                .get('/signup')
+                .end((err, res) => {
+            expect(302,done);
+            done();
+                })
+        });
+        it('Should return a status of 302 as /login is a route', function (done) {
+            supertest(app)
+                .get('/login')
+                .end((err, res) => {
+            expect(302,done);
+            done();
+                })
+        });
+
         it('Should respond with json file with a message that signup was successful', function (done) {
             const form = {
                 inputName: "John",
