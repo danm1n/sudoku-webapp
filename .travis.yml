@@ -6,6 +6,8 @@ services:
 env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/sudoku_test
 
+after_success: npm run coverage
+
 before_script:
   - psql -c 'create database sudoku_test' -U postgres
   - psql -U postgres -d sudoku_test -a -f table.sql
