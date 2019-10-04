@@ -4,8 +4,8 @@ node_js:
 services:
   - postgresql
 env:
-  - DATABASE_URL=postgresql://postgres@localhost:5432/greetings_test
+  - DATABASE_URL=postgresql://postgres@localhost:5432/sudoku_test
 
 before_script:
-  - psql -c 'create database greetings_test' -U postgres
-  - psql -U postgres -d greetings_test -a -f table.sql
+  - psql -c 'create database sudoku_test' -U postgres
+  - psql -U postgres -d sudoku_test -a -f table.sql

@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 module.exports = (req, res, next) => {
+    if(config.testing === true){
+        //--bypass token authentication--
+        req.user = "Test Account"
+        next();
+    }else{
     try {
         let header = req.headers['authorization'];
         if (typeof header !== 'undefined') {
@@ -18,4 +23,5 @@ module.exports = (req, res, next) => {
             error: err.stack
         })
     }
+}
 }

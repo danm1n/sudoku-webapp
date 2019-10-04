@@ -3,7 +3,6 @@ module.exports = (pool) => {
     const createAccount = async (name,username,password) => {
         
         let user = [name,username,password,0]
-        console.log(username)
         let all_users = await pool.query(`select username from users`)
         for(let user of all_users.rows){
             if(username === user.username){

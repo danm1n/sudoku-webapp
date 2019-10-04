@@ -16,7 +16,6 @@ module.exports = () => {
             let col = z
             for(var num = 1; num <= 9; num++){
             if(checkAll(grid,row,col,num) === false){
-                console.log('wrong')
                 return false;
             }
         }
@@ -35,7 +34,7 @@ module.exports = () => {
             if(grid[row][col] === number){
                 count += 1
                 if(count > 1){
-                console.log(`row:${row} col:${col} num:${number} count:${count} row`)
+                // console.log(`row:${row} col:${col} num:${number} count:${count} row`)
                 return false;
             }
         }
@@ -49,7 +48,7 @@ module.exports = () => {
              if(grid[row][col] === number){
                 count += 1
                 if(count > 1){
-                console.log(`row:${row} col:${col} num:${number} count:${count} col`)
+                // console.log(`row:${row} col:${col} num:${number} count:${count} col`)
                  return false;
                 }
              }
@@ -66,7 +65,7 @@ module.exports = () => {
                  if(grid[row +r ][col + c] === number){
                     count += 1
                      if(count > 1){
-                    console.log(`row:${row} col:${col} num:${number} count:${count} box`)
+                    // console.log(`row:${row} col:${col} num:${number} count:${count} box`)
                      return false;
                      }
                  }

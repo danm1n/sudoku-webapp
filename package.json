@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
+    "chai": "^4.2.0",
     "dotenv": "^8.1.0",
     "express-session": "^1.16.2",
     "jsonwebtoken": "^8.5.1",
@@ -16,9 +17,10 @@
   },
   "scripts": {
     "start": "node server.js",
+    "test": "./node_modules/mocha/bin/mocha --timeout 5000",
     "react": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "react-test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,5 +37,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2"
   }
 }

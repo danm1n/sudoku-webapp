@@ -22,6 +22,7 @@ module.exports = (generate,game_score) => {
 
     let checker = (req, res) => {
         let grid = req.body.grid;
+        // console.log(grid)
         if(user.checkSolution(grid)){
             game_score.increaseScore(req.user)
             res.json({

@@ -1,5 +1,6 @@
 {
     "database" : "postgresql://codex:mint1213@localhost:5432/testdb",
     "secret": "i like burgers",
-    "tokenLife": "24h"
+    "tokenLife": "24h",
+    "testing": false
 }
