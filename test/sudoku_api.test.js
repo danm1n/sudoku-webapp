@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 describe('------------------', function () {
-    // this.timeout(10000)
+    let highscoresTable;
     const signup = Signup(pool);
     const login = Login(pool);
     const sudoku = Sudoku();
@@ -40,8 +40,10 @@ describe('------------------', function () {
     const user_api = User_Api(login, signup);
     const sudoku_api = Sudoku_Api(sudoku, game_score);
     Routes(app, sudoku_api, user_api)
-    beforeEach(function () {
+    beforeEach(async function () {
         config.testing = true;
+        let table = await pool.query('SELECT username,highscore FROM users ORDER BY highscore DESC')
+        highscoresTable = table.rows
     });
 
     describe('Testing Sudoku game API', function () {
@@ -80,19 +82,20 @@ describe('------------------', function () {
                     done();
                 })
         });
-        describe('Should return highscores of all users.', function (done) {
-                supertest(app)
-                    .get('/api/users/highscore')
-                    .set('Accept', 'application/json, text/plain, */*')
-                    .end((err, res) => {
-                        console.log(res.body.data)
-                        expect(res.body.data).to.be.deep.equal(
-                            // [{ username: 'Test Account', highscore: 0 }]
-                        )
-                        expect(200, done);
-                        done();
-                    })
-            });
-
     });
+    describe('Testing User Highscore API', function () {
+        it('Should return highscores of all users.', function (done) {
+          
+            supertest(app)
+                .get('/api/users/highscore')
+                .set('Accept', 'application/json, text/plain, */*')
+                .end((err, res) => {
+                    expect(res.body.data).to.be.deep.equal(
+                        highscoresTable
+                    )
+                    expect(200, done);
+                    done();
+                })
+        });
+    })
 });

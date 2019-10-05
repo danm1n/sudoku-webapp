@@ -22,13 +22,7 @@ const pool = new Pool({
     ssl: useSSL
 });
 
-const app = express();
-
-
 describe('------------------', function () {
-    const signup = Signup(pool);
-    const login = Login(pool);
-    const game_score = Game_Score(pool);
     describe('Testing Webapp Functions', function (){
    
     beforeEach(function () {
@@ -39,7 +33,6 @@ describe('------------------', function () {
         it('Should return a random generated, game which difficulty is [easy], width 9 arrays/rows', function () {
             const sudoku = Sudoku();
             let puzzle = sudoku.intialBoard('easy')
-            console.log(`length:${puzzle[0].length}`)
             assert.deepEqual(puzzle[0].length, 9)
         });
         it('Should return a random generated, game which difficulty is [intermediate], width 9 arrays/rows', function () {
