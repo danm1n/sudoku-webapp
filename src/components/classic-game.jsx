@@ -147,7 +147,7 @@ export default class GenerateGame extends React.Component {
     <div className="row justify-content-sm-center">
     {this.state.onScreenKeyboard}
     </div>
-    <div className="row justify-content-center">
+    <div className="col justify-content-center">
     <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.checkBtnDisable}>Check</button>
     <button type="button" className="btn btn-warning btn-md button" onClick={this.newGameBtn}>New Game</button>
     </div>
