@@ -1,5 +1,5 @@
 .form-place{
-  padding-top:80px;
+  padding-top:150px;
 }
 
 .form-signin {
@@ -109,4 +109,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .exists{
   background-color: rgb(255, 255, 255);
+}
+
+.remove-decoration{
+  text-decoration: none;
+}
+
+.gameBtn{
+  margin:2px;
 }

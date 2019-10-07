@@ -13,7 +13,9 @@ export default class GenerateGame extends React.Component {
       level: props.level,
       response: '',
       popup: '',
-      btnStatus: false
+      btnStatus: false,
+      buttons: '',
+      activeBtn: '',
     }
   }
 
@@ -29,6 +31,7 @@ export default class GenerateGame extends React.Component {
         const grid = res.data.data;
         this.setState({ grid });
       })
+      this.dynamicBuildBtns()
   }
 
   makeTable = () => {
@@ -40,7 +43,8 @@ export default class GenerateGame extends React.Component {
         if(grid[row][col] !== 0 && typeof(grid[row][col]) !== "string"){
         children.push(<td className="exists"><input name={[row,col]} class="input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
       }else{
-        children.push(<td><input name={[row,col]} class="input" type="number" pattern="\d*" maxlength="1" min="1" max="9" onChange={this.handleChange} required/></td>)
+        if(grid[row][col] === 0) grid[row][col] = ""
+        children.push(<td><input name={[row,col]} class="input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required/></td>)
       }
     }
       table.push(<tr>{children}</tr>)
@@ -48,13 +52,26 @@ export default class GenerateGame extends React.Component {
     return table;
   }
 
+  dynamicBuildBtns = () => {
+    let buttonDiv =[];
+      for(var value = 1;value <= 9;value++){
+        buttonDiv.push(<button className="btn btn-info btn-sm gameBtn" value={value} type="button" onClick={this.activeBtn}>{value}</button>)
+      }
+      this.setState({buttons:buttonDiv})
+  }
+  activeBtn = (event) => {
+    this.setState({activeBtn:event.target.value})
+  }
+
   handleChange = event => {
     let grid = this.state.grid
     let row = Number(event.target.name[0])
     let col = Number(event.target.name[2]) 
-    grid[row][col] = event.target.value
-    
+    // grid[row][col] = event.target.value
+    grid[row][col] = this.state.activeBtn
     this.setState({ grid });
+    this.forceUpdate();
+    this.setState({activeBtn:""});
   }
 
   handleSubmit = async event => {
@@ -108,6 +125,9 @@ export default class GenerateGame extends React.Component {
       <table>
         {this.makeTable()}
     </table>
+    <div className="row justify-content-md-center">
+    {this.state.buttons}
+    </div>
     <div className="row justify-content-center">
     <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.btnStatus}>Check</button>
     <Link to="/"><button type="button" className="btn btn-warning btn-md button">New Game</button></Link>
