@@ -144,10 +144,10 @@ export default class GenerateGame extends React.Component {
       <table>
         {this.makeTable()}
     </table>
-    <div className="row justify-content-sm-center">
+    <div className="center-item">
     {this.state.onScreenKeyboard}
     </div>
-    <div className="col justify-content-center">
+    <div className="center-item">
     <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.checkBtnDisable}>Check</button>
     <button type="button" className="btn btn-warning btn-md button" onClick={this.newGameBtn}>New Game</button>
     </div>
