@@ -41,10 +41,10 @@ export default class GenerateGame extends React.Component {
       let children = [];
       for(var col = 0; col < grid.length;col++ ){
         if(grid[row][col] !== 0 && typeof(grid[row][col]) !== "string"){
-        children.push(<td className="exists"><input name={[row,col]} class="input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
+        children.push(<td className="exists"><input name={[row,col]} className="game-input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
       }else{
         if(grid[row][col] === 0) grid[row][col] = ""
-        children.push(<td><input name={[row,col]} class="input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required/></td>)
+        children.push(<td><input name={[row,col]} className="game-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>)
       }
     }
       table.push(<tr>{children}</tr>)
