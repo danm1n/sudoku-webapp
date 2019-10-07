@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
 import '../styling/App.css';
 import Auth from '../Auth'
 
@@ -12,10 +12,10 @@ export default class GenerateGame extends React.Component {
       grid: [],
       level: props.level,
       response: '',
-      popup: '',
-      btnStatus: false,
-      buttons: '',
+      checkBtnDisable: false,
+      onScreenKeyboard: '',
       activeBtn: '',
+      modalBtnAction: false
     }
   }
 
@@ -53,11 +53,11 @@ export default class GenerateGame extends React.Component {
   }
 
   dynamicBuildBtns = () => {
-    let buttonDiv =[];
+    let onScreenKeys =[];
       for(var value = 1;value <= 9;value++){
-        buttonDiv.push(<button className="btn btn-info btn-sm gameBtn" value={value} type="button" onClick={this.activeBtn}>{value}</button>)
+        onScreenKeys.push(<button className="btn btn-info btn-sm gameBtn" value={value} type="button" onClick={this.activeBtn}>{value}</button>)
       }
-      this.setState({buttons:buttonDiv})
+      this.setState({onScreenKeyboard:onScreenKeys})
   }
   activeBtn = (event) => {
     this.setState({activeBtn:event.target.value})
@@ -76,8 +76,6 @@ export default class GenerateGame extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    document.querySelector('#exampleModal').classList.add('show');
-    document.querySelector('#exampleModal').style.display = "block";
     const { grid } =
       this.state
       let config = {
@@ -90,8 +88,17 @@ export default class GenerateGame extends React.Component {
         this.setState({response: res.data.data})
       })
       if(this.state.response[0] === "You won, well done!"){
-        this.setState({btnStatus:true})
+        this.setState({checkBtnDisable:true})
+        this.setState({modalBtnAction: [false,this.Redirect]})
+      }else{
+        this.setState({modalBtnAction: [false,this.closeModal]})
       }
+      this.openModal()
+  }
+
+  openModal = () => {
+    document.querySelector('#exampleModal').classList.add('show');
+    document.querySelector('#exampleModal').style.display = "block";
   }
 
   closeModal = () => {
@@ -99,11 +106,23 @@ export default class GenerateGame extends React.Component {
     document.querySelector('#exampleModal').style.display = "none";
   }
 
+  Redirect = () => {
+    this.setState({modalBtnAction: [true]})
+  }
+
+  newGameBtn = () => {
+    this.setState({response: ["Are you sure you want to start a new game?","Yes"]})
+    this.setState({modalBtnAction:[false,this.Redirect]})
+    this.openModal();
+  }
+
 
   render() {
+    if(this.state.modalBtnAction[0]){
+      return <Redirect to="/" />  
+    }
     return (
       <div>
-
 <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog modal-dialog-centered" role="document">
     <div className="modal-content">
@@ -114,7 +133,7 @@ export default class GenerateGame extends React.Component {
         </button>
       </div>
       <div className="modal-footer">
-        <Link to={this.state.response[2]}><button type="button" className="btn btn-warning btn-md button">{this.state.response[1]}</button></Link>
+        <button type="button" className="btn btn-warning btn-md button" onClick={this.state.modalBtnAction[1]}>{this.state.response[1]}</button>
       </div>
     </div>
   </div>
@@ -125,12 +144,12 @@ export default class GenerateGame extends React.Component {
       <table>
         {this.makeTable()}
     </table>
-    <div className="row justify-content-md-center">
-    {this.state.buttons}
+    <div className="row justify-content-sm-center">
+    {this.state.onScreenKeyboard}
     </div>
     <div className="row justify-content-center">
-    <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.btnStatus}>Check</button>
-    <Link to="/"><button type="button" className="btn btn-warning btn-md button">New Game</button></Link>
+    <button id="checkBtn" className="btn btn-warning btn-md button" type="submit" disabled={this.state.checkBtnDisable}>Check</button>
+    <button type="button" className="btn btn-warning btn-md button" onClick={this.newGameBtn}>New Game</button>
     </div>
     </form>
     </div>
