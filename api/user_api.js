@@ -2,31 +2,31 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('../config/config')
 const saltRounds = 10;
-module.exports = (login, signup) => {
+module.exports = (login, signup, update_user) => {
 
 
     let createUser = async (req, res) => {
         let { inputName, inputUsername, inputPassword, confirmPassword } = req.body
         if (inputPassword === confirmPassword) {
             bcrypt.hash(req.body.inputPassword, saltRounds, async function (err, hash) {
-             let checkUser = await signup.createAccount(inputName, inputUsername, hash);
-            if(checkUser === true){
-                res.json({
-                    status: "success",
-                    createUser: checkUser,
-                    reason:"User account created."
-                });
-            }else{
-                res.json({
-                    status: "faliure",
-                    createUser: checkUser,
-                    reason:"Username already exists."
-                });
-            }
-        });
+                let checkUser = await signup.createAccount(inputName, inputUsername, hash);
+                if (checkUser === true) {
+                    res.json({
+                        status: "success",
+                        createUser: checkUser,
+                        reason: "User account created."
+                    });
+                } else {
+                    res.json({
+                        status: "failure",
+                        createUser: checkUser,
+                        reason: "Username already exists."
+                    });
+                }
+            });
         } else {
             res.json({
-                status: "faliure",
+                status: "failure",
                 reason: "Passwords do not match."
             })
         }
@@ -46,13 +46,13 @@ module.exports = (login, signup) => {
                 });
             } else {
                 res.json({
-                    status: 'faliure',
+                    status: 'failure',
                     data: "Password is incorrect.",
                 });
             }
         } else {
             res.json({
-                status: 'faliure',
+                status: 'failure',
                 data: "User does not exist.",
             })
         }
@@ -92,11 +92,30 @@ module.exports = (login, signup) => {
         });
     }
 
+    const editUser = async (req, res) => {
+        const { inputName, inputUsername, inputPassword, confirmPassword } = req.body
+        if (inputPassword === confirmPassword) {
+            bcrypt.hash(inputPassword, saltRounds, async function (err, hash) {
+                await update_user.update_account(req.user, inputName, inputUsername, hash)
+                res.json({
+                    status:"success",
+                    response: "Usera account updated"
+                })
+            })
+        } else {
+            res.json({
+                status: 'failure',
+                response: 'Passwords do not match'
+            })
+        }
+    }
+
 
     return {
         createUser,
         verify,
         sign_in,
-        userData
+        userData,
+        editUser
     }
 }

@@ -37,13 +37,13 @@ export default class NavBar extends React.Component {
         <Link className="nav-link" to="/about">About</Link>
       </li>
     </ul>
-    <div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div className="btn-group">
+  <button type="button" className="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Welcome, {this.state.username}
   </button>
-  <div class="dropdown-menu dropdown-menu-right">
-    <button class="dropdown-item" type="button">Edit Profile</button>
-    <button class="dropdown-item" type="button" onClick={this.signout}>Sign Out</button>
+  <div className="dropdown-menu dropdown-menu-right">
+    <Link to="/edit-user"><button className="dropdown-item" type="button">Edit Profile</button></Link>
+    <button className="dropdown-item" type="button" onClick={this.signout}>Sign Out</button>
   </div>
 </div>
   </div>

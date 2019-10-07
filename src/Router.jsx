@@ -5,7 +5,8 @@ import HomePage from './pages/HomePage';
 import NewGame from './pages/NewGame';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import About from './pages/About'
+import Edit_User from './pages/Edit_User'
+import About from './pages/About';
 
 import Auth from './Auth';
 import HighScore from './pages/HighScore';
@@ -20,6 +21,7 @@ const Router = (props) => (
       <Route exact path="/about" component={About} />
       <PrivateRoute exact path="/" component={HomePage} />
       <PrivateRoute path="/new-game/:handle" component={NewGame} />
+      <PrivateRoute exact path="/edit-user" component={Edit_User} />
     </Switch>
   </HashRouter>
 

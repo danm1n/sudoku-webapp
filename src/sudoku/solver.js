@@ -1,12 +1,11 @@
 const checker = require('./checker')
-// const resetGrid = require('./resetGrid')
 module.exports = () => {
     let failded_attempts = 0;
     function solve(grid, row, col) {
         // attempts()
         if(failded_attempts >= 15000){
-            // resetGrid()
-            return true;
+            console.log('Retry')
+            return "Retry";
         }
         let coord = findEmptyBlock(grid,row,col)
         row = coord[0]

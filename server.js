@@ -16,6 +16,7 @@ const User_Api = require('./api/user_api');
 
 const Signup = require('./src/user/signup');
 const Login = require('./src/user/login');
+const Edit_User = require('./src/user/edit_user');
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -41,9 +42,11 @@ app.use(bodyParser.json());
 
 const signup = Signup(pool);
 const login = Login(pool);
+const edit_user = Edit_User(pool);
+
 const sudoku = Sudoku();
 const game_score = Game_Score(pool);
-const user_api = User_Api(login,signup);
+const user_api = User_Api(login,signup,edit_user);
 const sudoku_api = Sudoku_Api(sudoku,game_score);
 Routes(app,sudoku_api,user_api)
 

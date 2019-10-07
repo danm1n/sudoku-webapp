@@ -106,7 +106,7 @@ describe('----------------', function () {
                     assert.deepEqual(res.body,
                         {
                             reason: "Passwords do not match.",
-                            status: "faliure"
+                            status: "failure"
                         }
                     )
                 })
@@ -128,7 +128,7 @@ describe('----------------', function () {
                     expect('Content-Type', /json/)
                     assert.deepEqual(res.body,
                         {
-                            status: 'faliure',
+                            status: 'failure',
                             createUser: false,
                             reason: 'Username already exists.'
                         }
@@ -171,7 +171,7 @@ describe('----------------', function () {
                     expect('Content-Type', /json/)
                     let response = Object.entries(res.body)
                     assert.deepEqual([response[0], response[1]],
-                        [['status', 'faliure'],
+                        [['status', 'failure'],
                         ['data', 'User does not exist.']]
                     )
                 })
@@ -191,7 +191,7 @@ describe('----------------', function () {
                     expect('Content-Type', /json/)
                     let response = Object.entries(res.body)
                     assert.deepEqual([response[0], response[1]],
-                        [['status', 'faliure'],
+                        [['status', 'failure'],
                         ['data', 'Password is incorrect.']]
                     )
                 })
