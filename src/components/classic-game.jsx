@@ -84,7 +84,7 @@ export default class GenerateGame extends React.Component {
     this.setState({ grid });
     this.forceUpdate();
     this.setState({ activeBtn: "" });
-    if (this.state.mistakes === 1) {
+    if (this.state.mistakes === 0) {
       this.openModal()
       this.setState({
         checkBtnDisable: true,
