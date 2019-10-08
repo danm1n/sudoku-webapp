@@ -15,7 +15,7 @@ module.exports = () => {
 
     const checkSolution = (grid) => {
         grid  = standardizeData(grid)
-        if(grid === false)return false;
+        if(grid === false)return "Clash";
         for(var z =0 ; z < grid.length;z++){
             let row = z
             let col = z

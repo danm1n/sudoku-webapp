@@ -23,17 +23,22 @@ module.exports = (generate,game_score) => {
     let checker = (req, res) => {
         let grid = req.body.grid;
         // console.log(grid)
-        if(user.checkSolution(grid)){
+        if(user.checkSolution(grid) === true){
             game_score.increaseScore(req.user)
             res.json({
                 status: 'success',
                 data: ['You won, well done!','New Game','/']
             });
-        }else{
+        }else if(user.checkSolution(grid) === false){
             res.json({
                 status: 'success',
                 data: ['Looks like your numbers clash.','Try Again']
             });
+        }else{
+            res.json({
+                status: 'success',
+                data: ['Looks like the puzzle is incomplete.','Resume']
+            });   
         }
     }
 

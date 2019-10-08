@@ -50,7 +50,11 @@ export default class GenerateGame extends React.Component {
         children.push(<td className="exists"><input name={[row,col]} className="game-input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
       }else{
         if(grid[row][col] === 0) grid[row][col] = ""
+        if(grid[row][col] === ""){
         children.push(<td><input name={[row,col]} className="game-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>)
+        }else{
+          children.push(<td><input name={[row,col]} className="correct-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>) 
+        }
       }
     }else{
       children.push(<td><input name={[row,col]} className="wrong-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>)
