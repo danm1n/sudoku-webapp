@@ -12,7 +12,7 @@ export default class NewGame extends React.Component {
     return (
         <div className="bg">
             <NavBar />
-        <div className="container">
+        <div className="container-fluid">
             <div className="row justify-content-center">
             <ClassicGame level={this.state.level}/>
             </div>
