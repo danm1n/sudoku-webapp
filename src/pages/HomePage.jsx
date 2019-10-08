@@ -17,9 +17,7 @@ export default class HomePage extends React.Component {
 
   handleChange = event => {
     let selectedLvl = event.target.value;
-    console.log(`selected1:${selectedLvl}`)
     this.setState({ selectedLvl })
-    console.log(`selected2:${selectedLvl}`)
   }
 
   startGame = () => {

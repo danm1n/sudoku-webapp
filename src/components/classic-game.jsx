@@ -102,8 +102,8 @@ export default class GenerateGame extends React.Component {
     for (var row = 0; row < grid.length; row++) {
       for (var col = 0; col < grid.length; col++) {
         if (Number(grid[row][col]) !== answer[row][col] && grid[row][col] !== "") {
-          console.log('test')
           this.setState({ mistakes })
+          return;
         }
       }
     }
