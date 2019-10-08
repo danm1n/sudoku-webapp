@@ -32,7 +32,6 @@ export default class GenerateGame extends React.Component {
         const grid = res.data.data;
         const answer = res.data.answer;
         this.setState({ grid,answer });
-        // this.setState({  });
       })
       this.dynamicBuildBtns()
   }
@@ -41,7 +40,6 @@ export default class GenerateGame extends React.Component {
     let table = [];
     let grid = this.state.grid
     let answer = this.state.answer
-    console.log(answer)
     for(var row = 0;row < grid.length;row++){
       let children = [];
       for(var col = 0; col < grid.length;col++ ){
@@ -80,7 +78,6 @@ export default class GenerateGame extends React.Component {
     let grid = this.state.grid
     let row = Number(event.target.name[0])
     let col = Number(event.target.name[2]) 
-    // grid[row][col] = event.target.value
     grid[row][col] = this.state.activeBtn
     this.setState({ grid });
     this.forceUpdate();
@@ -154,6 +151,7 @@ export default class GenerateGame extends React.Component {
 
 
       <form onSubmit={this.handleSubmit}>
+      <div><span>mistakes:0/3</span></div>
       <table>
         {this.makeTable()}
     </table>
