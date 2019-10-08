@@ -17,7 +17,7 @@ export default class GenerateGame extends React.Component {
       onScreenKeyboard: '',
       activeBtn: '',
       modalBtnAction: false,
-      mistakes: 2,
+      mistakes: 3,
     }
   }
 
@@ -80,11 +80,11 @@ export default class GenerateGame extends React.Component {
     let row = Number(event.target.name[0])
     let col = Number(event.target.name[2])
     grid[row][col] = this.state.activeBtn
+    this.countMistakes(row,col);
     this.setState({ grid });
     this.forceUpdate();
     this.setState({ activeBtn: "" });
-    this.countMistakes()
-    if (this.state.mistakes < 1) {
+    if (this.state.mistakes === 1) {
       this.openModal()
       this.setState({
         checkBtnDisable: true,
@@ -95,18 +95,13 @@ export default class GenerateGame extends React.Component {
     }
   }
 
-  countMistakes = () => {
+  countMistakes = (row,col) => {
     let answer = this.state.answer
     let grid = this.state.grid
     let mistakes = this.state.mistakes - 1
-    for (var row = 0; row < grid.length; row++) {
-      for (var col = 0; col < grid.length; col++) {
         if (Number(grid[row][col]) !== answer[row][col] && grid[row][col] !== "") {
           this.setState({ mistakes })
-          return;
         }
-      }
-    }
   }
 
   handleSubmit = async event => {
@@ -176,7 +171,7 @@ export default class GenerateGame extends React.Component {
 
 
         <form onSubmit={this.handleSubmit}>
-          <div><span>mistakes:0/3</span></div>
+          <div className="game-status"><span>mistakes:{this.state.mistakes}</span></div>
           <table>
             {this.makeTable()}
           </table>
