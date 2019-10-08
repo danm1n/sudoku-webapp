@@ -10,6 +10,7 @@ export default class GenerateGame extends React.Component {
     super(props);
     this.state ={
       grid: [],
+      answer: [],
       level: props.level,
       response: '',
       checkBtnDisable: false,
@@ -19,17 +20,19 @@ export default class GenerateGame extends React.Component {
     }
   }
 
-  componentDidMount() {
+ async componentDidMount() {
     let config = {
       headers: {
        'Authorization': `bearer:${Auth.getToken()}`
       }
     }
     let level = this.state.level
-    axios.get(`/api/new-game/${level}`, config)
+   await axios.get(`/api/new-game/${level}`, config)
       .then(res => {
         const grid = res.data.data;
-        this.setState({ grid });
+        const answer = res.data.answer;
+        this.setState({ grid,answer });
+        // this.setState({  });
       })
       this.dynamicBuildBtns()
   }
@@ -37,16 +40,22 @@ export default class GenerateGame extends React.Component {
   makeTable = () => {
     let table = [];
     let grid = this.state.grid
+    let answer = this.state.answer
+    console.log(answer)
     for(var row = 0;row < grid.length;row++){
       let children = [];
       for(var col = 0; col < grid.length;col++ ){
+        if(Number(grid[row][col]) === answer[row][col] || grid[row][col] === 0 || grid[row][col] === ""){
         if(grid[row][col] !== 0 && typeof(grid[row][col]) !== "string"){
         children.push(<td className="exists"><input name={[row,col]} className="game-input" value={grid[row][col]} onChange={this.handleChange} disabled/></td>)
       }else{
         if(grid[row][col] === 0) grid[row][col] = ""
         children.push(<td><input name={[row,col]} className="game-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>)
       }
+    }else{
+      children.push(<td><input name={[row,col]} className="wrong-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly/></td>)
     }
+  }
       table.push(<tr>{children}</tr>)
     }
     return table;

@@ -3,14 +3,19 @@ module.exports = () => {
     const standardizeData = (grid) => {
         for(var row = 0; row < grid.length;row++){
             for(var col = 0; col < grid.length;col++){
+                if(grid[row][col] === ""){
+                    return false
+                }else{
                 grid[row][col] = Number(grid[row][col])
         }
+    }
     }
         return grid
 }
 
     const checkSolution = (grid) => {
         grid  = standardizeData(grid)
+        if(grid === false)return false;
         for(var z =0 ; z < grid.length;z++){
             let row = z
             let col = z
