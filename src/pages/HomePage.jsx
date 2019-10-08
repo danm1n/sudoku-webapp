@@ -9,9 +9,10 @@ import Auth from '../Auth'
 
 
 export default class HomePage extends React.Component {
-  state ={
+  state = {
     selectedLvl: "",
-    redirect:false,
+    redirect: false,
+    popupMsg: ""
   }
 
   handleChange = event => {
@@ -22,42 +23,49 @@ export default class HomePage extends React.Component {
   }
 
   startGame = () => {
-    this.setState({redirect:true})
+    if (this.state.selectedLvl !== "") {
+      this.setState({ popupMsg: "" })
+      this.setState({ redirect: true })
+    } else {
+      let alert = [<div class="alert alert-warning" role="alert">Please select a level</div>]
+      this.setState({ popupMsg: alert[0] })
+    }
   }
 
   render() {
-    if(this.state.redirect){
-    if(this.state.selectedLvl !== ""){
-      this.setState({selectedLvl:""})
-     return <Redirect to={`/new-game/${this.state.selectedLvl}`} />
+    if (this.state.redirect) {
+      return <Redirect to={`/new-game/${this.state.selectedLvl}`} />
     }
-  }
-  return (
-    <div className="bg">
-      <NavBar />
-      <div className="container">
-        <div className="row justify-content-center">
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <div className="row justify-content-center">
-          <div className="button">
-            <div class="input-group">
-              <select class="custom-select" onChange={this.handleChange}>
-                <option selected>Choose Level</option>
-                <option value="easy">Easy</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="hard">Hard</option>
-                <option value="expert">Expert</option>
-              </select>
-              <div class="input-group-append">
-            <button class="btn btn-warning btm-md">Start Game</button>
+
+    return (
+      <div className="bg">
+        <NavBar />
+        <div className="container">
+          <div className="row justify-content-center">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <div className="row justify-content-center">
+            <div className="button">
+              <div class="input-group">
+                <select class="custom-select" onChange={this.handleChange}>
+                  <option selected>Choose Level</option>
+                  <option value="easy">Easy</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="hard">Hard</option>
+                  <option value="expert">Expert</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-warning btm-md" onClick={this.startGame}>Start Game</button>
+                </div>
               </div>
             </div>
           </div>
+          <div className="row justify-content-center">
+            {this.state.popupMsg}
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
