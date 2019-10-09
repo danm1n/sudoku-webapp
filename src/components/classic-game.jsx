@@ -84,8 +84,7 @@ export default class GenerateGame extends React.Component {
     this.setState({ grid });
     this.forceUpdate();
     this.setState({ activeBtn: "" });
-    if (this.state.mistakes === 0) {
-      this.openModal()
+    if (this.state.mistakes === 1) {
       this.setState({
         checkBtnDisable: true,
         modalBtnAction: [false, this.Redirect],
@@ -148,6 +147,9 @@ export default class GenerateGame extends React.Component {
 
 
   render() {
+    if(this.state.mistakes === 0){
+      this.openModal()
+    }
     if (this.state.modalBtnAction[0]) {
       return <Redirect to="/" />
     }
@@ -171,7 +173,7 @@ export default class GenerateGame extends React.Component {
 
 
         <form onSubmit={this.handleSubmit}>
-          <div className="game-status"><span>mistakes:{this.state.mistakes}</span></div>
+          <div className="game-status"><span>mistakes left:{this.state.mistakes}</span></div>
           <table>
             {this.makeTable()}
           </table>
