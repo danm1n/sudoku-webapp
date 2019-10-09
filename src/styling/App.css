@@ -149,3 +149,9 @@ input[type=number]::-webkit-outer-spin-button {
 .center-item{
   text-align: center;
 }
+
+.highscoreTable{
+  margin-top: 50px;
+  background-color: rgba(0, 0, 0, 0.568) !important;
+  color:white;
+}

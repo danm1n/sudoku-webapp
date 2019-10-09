@@ -41,7 +41,7 @@ export default class HighScore extends React.Component {
     <div className="bg">
       <NavBar />
       <div className="container">
-        <table className="table">
+        <table className="table highscoreTable">
   <thead>
     <tr>
       <th scope="col">#</th>
