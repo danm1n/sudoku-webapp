@@ -43,7 +43,7 @@ module.exports = () => {
         resetG()
         populateGrid()
         if (sudoku_Solver.solve(grid, row, col) === "Retry") {
-            sudoku_Solver.resetFailed()
+            intialBoard(level)
         } else {
             let answer = JSON.stringify(grid)
             if (level === "easy") rounds = 3
