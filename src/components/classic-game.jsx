@@ -80,11 +80,11 @@ export default class GenerateGame extends React.Component {
     let row = Number(event.target.name[0])
     let col = Number(event.target.name[2])
     grid[row][col] = this.state.activeBtn
-    this.countMistakes(row,col);
+    let remaining_mistakes = this.countMistakes(row,col);
     this.setState({ grid });
     this.forceUpdate();
     this.setState({ activeBtn: "" });
-    if (this.state.mistakes === 1) {
+    if (remaining_mistakes === 0) {
       this.setState({
         checkBtnDisable: true,
         modalBtnAction: [false, this.Redirect],
@@ -97,10 +97,12 @@ export default class GenerateGame extends React.Component {
   countMistakes = (row,col) => {
     let answer = this.state.answer
     let grid = this.state.grid
-    let mistakes = this.state.mistakes - 1
+    let mistakes = this.state.mistakes
         if (Number(grid[row][col]) !== answer[row][col] && grid[row][col] !== "") {
+          mistakes = mistakes - 1
           this.setState({ mistakes })
         }
+        return mistakes
   }
 
   handleSubmit = async event => {
