@@ -15,7 +15,7 @@ export default class GenerateGame extends React.Component {
       response: '',
       checkBtnDisable: false,
       onScreenKeyboard: '',
-      activeBtn: '',
+      activeBlock: '',
       gamemode: '',
       modalBtnAction: false,
       mistakes: 3,
@@ -49,17 +49,17 @@ export default class GenerateGame extends React.Component {
       for (var col = 0; col < grid.length; col++) {
         if (Number(grid[row][col]) === answer[row][col] || grid[row][col] === 0 || grid[row][col] === "") {
           if (grid[row][col] !== 0 && typeof (grid[row][col]) !== "string") {
-            children.push(<td className="exists"><input name={[row, col]} className="game-input" value={grid[row][col]} onChange={this.handleChange} disabled /></td>)
+            children.push(<td className="exists"><input name={[row, col]} className="game-input" value={grid[row][col]} onChange={this.setActiveBlock} disabled /></td>)
           } else {
             if (grid[row][col] === 0) grid[row][col] = ""
             if (grid[row][col] === "") {
-              children.push(<td><input name={[row, col]} className="game-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly /></td>)
+              children.push(<td><input name={[row, col]} className="game-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.setActiveBlock} onChange={this.setActiveBlock} required readOnly /></td>)
             } else {
-              children.push(<td><input name={[row, col]} className="correct-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly /></td>)
+              children.push(<td><input name={[row, col]} className="correct-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.setActiveBlock} onChange={this.setActiveBlock} required readOnly /></td>)
             }
           }
         } else {
-          children.push(<td><input name={[row, col]} className="wrong-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.handleChange} onChange={this.handleChange} required readOnly /></td>)
+          children.push(<td><input name={[row, col]} className="wrong-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.setActiveBlock} onChange={this.setActiveBlock} required readOnly /></td>)
         }
       }
       table.push(<tr>{children}</tr>)
@@ -70,53 +70,59 @@ export default class GenerateGame extends React.Component {
   dynamicBuildBtns = () => {
     let onScreenKeys = [];
     for (var value = 1; value <= 9; value++) {
-      onScreenKeys.push(<button className="btn btn-info btn-sm gameBtn" value={value} type="button" onClick={this.activeBtn}>{value}</button>)
+      onScreenKeys.push(<button className="btn btn-info btn-md gameBtn" value={value} type="button" onClick={this.onScreenbuttonTrigger}>{value}</button>)
     }
     this.setState({ onScreenKeyboard: onScreenKeys })
   }
-  activeBtn = (event) => {
-    this.setState({ activeBtn: event.target.value })
-  }
 
-  handleChange = event => {
-    let grid = this.state.grid
-    let row = Number(event.target.name[0])
-    let col = Number(event.target.name[2])
-    grid[row][col] = this.state.activeBtn
-    let remaining_mistakes = this.countMistakes(row,col);
-    this.setState({ grid });
-    this.forceUpdate();
-    this.setState({ activeBtn: "" });
-    if (remaining_mistakes === 0) {
-      this.setState({
-        checkBtnDisable: true,
-        modalBtnAction: [false, this.Redirect],
-        response: ["Looks like you ran out of lives", "New Game"],
-        onScreenKeyboard: ''
-      })
+  onScreenbuttonTrigger = (event) => {
+    let grid = this.state.grid;
+    let activeBtn = event.target.value;
+    let activeBlock = this.state.activeBlock
+    if (activeBlock !== '') {
+      let row = activeBlock[0];
+      let col = activeBlock[1];
+      grid[row][col] = activeBtn;
+      this.setState({ grid });
+      let remaining_mistakes = this.countMistakes(row, col);
+      if (remaining_mistakes === 0) {
+        this.setState({
+          checkBtnDisable: true,
+          modalBtnAction: [false, this.Redirect],
+          response: ["Looks like you ran out of lives", "New Game"],
+          onScreenKeyboard: ''
+        })
+      }
+      this.forceUpdate();
     }
   }
 
-  countMistakes = (row,col) => {
+  setActiveBlock = event => {
+    let row = Number(event.target.name[0])
+    let col = Number(event.target.name[2])
+    this.setState({ activeBlock: [row, col] });
+  }
+
+  countMistakes = (row, col) => {
     let answer = this.state.answer
     let grid = this.state.grid
     let mistakes = this.state.mistakes
-        if (Number(grid[row][col]) !== answer[row][col] && grid[row][col] !== "") {
-          mistakes = mistakes - 1
-          this.setState({ mistakes })
-        }
-        return mistakes
+    if (Number(grid[row][col]) !== answer[row][col] && grid[row][col] !== "") {
+      mistakes = mistakes - 1
+      this.setState({ mistakes })
+    }
+    return mistakes
   }
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { grid,gamemode } = this.state
+    const { grid, gamemode } = this.state
     let config = {
       headers: {
         'Authorization': `bearer:${Auth.getToken()}`
       }
     }
-    await axios.post(`/api/check`, { grid,gamemode }, config)
+    await axios.post(`/api/check`, { grid, gamemode }, config)
       .then(res => {
         this.setState({ response: res.data.data })
       })
@@ -151,7 +157,7 @@ export default class GenerateGame extends React.Component {
 
 
   render() {
-    if(this.state.mistakes === 0){
+    if (this.state.mistakes === 0) {
       this.openModal()
     }
     if (this.state.modalBtnAction[0]) {
