@@ -53,7 +53,7 @@ describe('------------------', function () {
                 .set('Accept', 'application/json, text/plain, */*')
                 .end((err, res) => {
                     expect(res.body.status).to.be.deep.equal("success")
-                    expect(res.body.data.length).to.be.deep.equal(9)
+                    expect(res.body.grid.length).to.be.deep.equal(9)
                     expect(200, done);
                     done();
                 })
