@@ -88,7 +88,9 @@ export default class GenerateGame extends React.Component {
       let row = activeBlock[0];
       let col = activeBlock[1];
       grid[row][col] = activeBtn;
-      this.setState({ grid });
+      this.setState({ grid,
+                      activeBlock:['','']
+                    });
       let remaining_mistakes = this.countMistakes(row, col);
       if (remaining_mistakes === 0) {
         this.setState({
