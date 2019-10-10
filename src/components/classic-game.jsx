@@ -42,12 +42,16 @@ export default class GenerateGame extends React.Component {
 
   makeTable = () => {
     let table = [];
-    let grid = this.state.grid
-    let answer = this.state.answer
+    let { grid,answer } = this.state
+    let coord = this.state.activeBlock
     for (var row = 0; row < grid.length; row++) {
       let children = [];
       for (var col = 0; col < grid.length; col++) {
-        if (Number(grid[row][col]) === answer[row][col] || grid[row][col] === 0 || grid[row][col] === "") {
+        if(row === coord[0] && col === coord[1]){
+          console.log(row,col === coord[0],coord[1])
+           children.push(<td className="exists"><input name={[row, col]} className="active-block" value={grid[row][col]} onChange={this.setActiveBlock} disabled /></td>)
+        }else{
+           if (Number(grid[row][col]) === answer[row][col] || grid[row][col] === 0 || grid[row][col] === "") {
           if (grid[row][col] !== 0 && typeof (grid[row][col]) !== "string") {
             children.push(<td className="exists"><input name={[row, col]} className="game-input" value={grid[row][col]} onChange={this.setActiveBlock} disabled /></td>)
           } else {
@@ -61,6 +65,7 @@ export default class GenerateGame extends React.Component {
         } else {
           children.push(<td><input name={[row, col]} className="wrong-input" value={grid[row][col]} type="number" pattern="\d*" maxlength="1" min="1" max="9" onFocus={this.setActiveBlock} onChange={this.setActiveBlock} required readOnly /></td>)
         }
+      }
       }
       table.push(<tr>{children}</tr>)
     }

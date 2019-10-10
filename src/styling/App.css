@@ -132,6 +132,15 @@ tr:nth-child(3n) td {
   border:none;
 }
 
+.active-block{
+  width:100%;
+  height: 100%;
+  background-color: rgb(57, 202, 250);
+  color:rgb(0, 0, 0);
+  text-align: center;
+  border:none;
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
