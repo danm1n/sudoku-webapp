@@ -4,7 +4,7 @@ module.exports = () => {
     function solve(grid, row, col) {
         // attempts()
         if(failded_attempts >= 15000){
-            console.log('Retry')
+            failded_attempts = 0;
             return "Retry";
         }
         let coord = findEmptyBlock(grid,row,col)

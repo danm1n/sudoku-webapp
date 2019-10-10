@@ -9,7 +9,8 @@ module.exports = (generate,game_score) => {
             res.json({
                 status: 'success',
                 data: genPuzzle[0],
-                answer: genPuzzle[1]
+                answer: genPuzzle[1],
+                mistake: genPuzzle[2]
             });
         }
         catch (err) {

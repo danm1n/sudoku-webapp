@@ -27,7 +27,7 @@ module.exports = () => {
     }
 
     function populateGrid() {
-        for (var z = 0; z < 15; z++) {
+        for (var z = 0; z < 12; z++) {
             let number = generateNumber(0, 9)
             let row = generateNumber(0, 8)
             let col = generateNumber(0, 8)
@@ -40,16 +40,17 @@ module.exports = () => {
 
     function intialBoard(level) {
         let rounds = 0;
+        let mistakes_allowed = 0;
         resetG()
         populateGrid()
         if (sudoku_Solver.solve(grid, row, col) === "Retry") {
             intialBoard(level)
         } else {
             let answer = JSON.stringify(grid)
-            if (level === "easy") rounds = 3
-            if (level === "intermediate") rounds = 56
-            if (level === "hard") rounds = 63
-            if (level === "expert") rounds = 71
+            if (level === "easy") rounds = 3, mistakes_allowed = 2
+            if (level === "intermediate") rounds = 62, mistakes_allowed = 3
+            if (level === "hard") rounds = 63, mistakes_allowed = 4
+            if (level === "expert") rounds = 64, mistakes_allowed = 5
             for (var z = 0; z < rounds; z++) {
                 let row = generateNumber(0, 8)
                 let col = generateNumber(0, 8)
@@ -57,7 +58,7 @@ module.exports = () => {
                     grid[row][col] = 0;
                 } else { z = z - 1 }
             }
-            return [grid, JSON.parse(answer)]
+            return [level,grid, JSON.parse(answer),mistakes_allowed]
         }
     }
 
