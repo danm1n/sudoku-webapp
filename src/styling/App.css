@@ -68,6 +68,10 @@
   }
 } */
 
+.editProfile{
+  padding-top: 50px !important;
+}
+
 .game-status{
   width:100%;
   background-color: white;

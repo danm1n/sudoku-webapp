@@ -58,7 +58,7 @@ export default class Signup extends React.Component {
         return (
             <div className="bg">
             <NavBar />
-            <div className="form-place">
+            <div className="form-place editProfile">
                 <form className="form-signin" onSubmit={this.handleSubmit}>
                     <h1 className="h3 mb-3 font-weight-normal">Edit User</h1>
                     <label for="inputName" className="sr-only">Name</label>

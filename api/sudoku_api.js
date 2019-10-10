@@ -8,9 +8,10 @@ module.exports = (generate,game_score) => {
             let genPuzzle = generate.intialBoard(mode);
             res.json({
                 status: 'success',
-                data: genPuzzle[0],
-                answer: genPuzzle[1],
-                mistake: genPuzzle[2]
+                mode: genPuzzle[0],
+                grid: genPuzzle[1],
+                answer: genPuzzle[2],
+                mistake: genPuzzle[3]
             });
         }
         catch (err) {
@@ -22,10 +23,10 @@ module.exports = (generate,game_score) => {
     };
 
     let checker = (req, res) => {
-        let grid = req.body.grid;
+        let {grid,gamemode} = req.body;
         // console.log(grid)
         if(user.checkSolution(grid) === true){
-            game_score.increaseScore(req.user)
+            game_score.increaseScore(req.user,gamemode)
             res.json({
                 status: 'success',
                 data: ['You won, well done!','New Game','/']

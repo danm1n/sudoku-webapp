@@ -16,6 +16,7 @@ export default class GenerateGame extends React.Component {
       checkBtnDisable: false,
       onScreenKeyboard: '',
       activeBtn: '',
+      gamemode: '',
       modalBtnAction: false,
       mistakes: 3,
     }
@@ -30,9 +31,11 @@ export default class GenerateGame extends React.Component {
     let level = this.state.level
     await axios.get(`/api/new-game/${level}`, config)
       .then(res => {
-        const grid = res.data.data;
+        const gamemode = res.data.mode;
+        const grid = res.data.grid;
         const answer = res.data.answer;
-        this.setState({ grid, answer });
+        const mistakes = res.data.mistake;
+        this.setState({ gamemode, grid, answer, mistakes });
       })
     this.dynamicBuildBtns()
   }
@@ -107,14 +110,13 @@ export default class GenerateGame extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { grid } =
-      this.state
+    const { grid,gamemode } = this.state
     let config = {
       headers: {
         'Authorization': `bearer:${Auth.getToken()}`
       }
     }
-    await axios.post(`/api/check`, { grid }, config)
+    await axios.post(`/api/check`, { grid,gamemode }, config)
       .then(res => {
         this.setState({ response: res.data.data })
       })
