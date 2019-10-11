@@ -18,7 +18,7 @@ export default class GenerateGame extends React.Component {
       activeBlock: '',
       gamemode: '',
       modalBtnAction: false,
-      mistakes: 3,
+      mistakes: 'loading',
     }
   }
 
@@ -40,7 +40,7 @@ export default class GenerateGame extends React.Component {
     this.dynamicBuildBtns()
   }
 
-  makeTable = () => {
+  BuildGame = () => {
     let table = [];
     let { grid,answer } = this.state
     let coord = this.state.activeBlock
@@ -192,7 +192,7 @@ export default class GenerateGame extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="game-status"><span>mistakes left:{this.state.mistakes}</span></div>
           <table>
-            {this.makeTable()}
+            {this.BuildGame()}
           </table>
           <div className="center-item">
             {this.state.onScreenKeyboard}
