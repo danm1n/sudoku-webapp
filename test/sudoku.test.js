@@ -1,10 +1,10 @@
 const assert = require('assert');
 const express = require('express');
 
-const Sudoku = require('../src/sudoku/sudoku');
-const Game_Score = require('../src/user/game-score');
-const Signup = require('../src/user/signup');
-const Login = require('../src/user/login');
+const Sudoku = require('../services/sudoku/sudoku');
+const Game_Score = require('../services/user/game-score');
+const Signup = require('../services/user/signup');
+const Login = require('../services/user/login');
 const config = require('../config/config')
 const pg = require("pg");
 

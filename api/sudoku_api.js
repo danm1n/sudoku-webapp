@@ -1,4 +1,4 @@
-const CheckSolution = require('../src/user/checkuserBoard')
+const CheckSolution = require('../services/user/checkuserBoard')
 const user = CheckSolution()
 module.exports = (generate,game_score) => {
 
@@ -23,10 +23,10 @@ module.exports = (generate,game_score) => {
     };
 
     let checker = (req, res) => {
-        let {grid,gamemode} = req.body;
+        let {grid,level} = req.body;
         // console.log(grid)
         if(user.checkSolution(grid) === true){
-            game_score.increaseScore(req.user,gamemode)
+            game_score.increaseScore(req.user,level)
             res.json({
                 status: 'success',
                 data: ['You won, well done!','New Game','/']
@@ -56,5 +56,5 @@ module.exports = (generate,game_score) => {
             all,
             checker,
             highscore
-        }
+   }
 }

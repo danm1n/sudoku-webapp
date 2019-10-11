@@ -8,15 +8,15 @@ require('dotenv').config()
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const Sudoku = require('./src/sudoku/sudoku');
+const Sudoku = require('./services/sudoku/sudoku');
 const Routes = require('./routes/sudoku_routes');
-const Game_Score = require('./src/user/game-score');
+const Game_Score = require('./services/user/game-score');
 const Sudoku_Api = require('./api/sudoku_api');
 const User_Api = require('./api/user_api');
 
-const Signup = require('./src/user/signup');
-const Login = require('./src/user/login');
-const Edit_User = require('./src/user/edit_user');
+const Signup = require('./services/user/signup');
+const Login = require('./services/user/login');
+const Edit_User = require('./services/user/edit_user');
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -36,7 +36,7 @@ const pool = new Pool({
   saveUninitialized: true
 }));
 
-app.use(express.static('build'));
+app.use(express.static('lib'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

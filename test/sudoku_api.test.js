@@ -3,13 +3,13 @@ const assert = require('assert');
 const express = require('express');
 const chai = require('chai')
 const bodyParser = require('body-parser');
-const Sudoku = require('../src/sudoku/sudoku');
+const Sudoku = require('../services/sudoku/sudoku');
 const Routes = require('../routes/sudoku_routes');
-const Game_Score = require('../src/user/game-score');
+const Game_Score = require('../services/user/game-score');
 const Sudoku_Api = require('../api/sudoku_api');
 const User_Api = require('../api/user_api');
-const Signup = require('../src/user/signup');
-const Login = require('../src/user/login');
+const Signup = require('../services/user/signup');
+const Login = require('../services/user/login');
 const config = require('../config/config')
 const pg = require("pg");
 
