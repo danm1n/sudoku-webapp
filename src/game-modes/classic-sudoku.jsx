@@ -49,9 +49,9 @@ export default class ClassicMode extends React.Component {
     let grid = this.state.grid;
     let activeBtn = event.target.value;
     let activeBlock = this.state.activeBlock;
-    if (activeBlock !== '') {
-      let row = activeBlock[0];
-      let col = activeBlock[1];
+    let row = activeBlock[0];
+    let col = activeBlock[1];
+    if (activeBlock !== '' && typeof(grid[row][col]) === "string") {
       grid[row][col] = activeBtn;
       this.setState({ grid, activeBlock: ['', ''] });
       this.forceUpdate();
@@ -89,6 +89,7 @@ export default class ClassicMode extends React.Component {
 
   onKeyDown(keyName) {
     let activeBlock = this.state.activeBlock;
+    if(typeof(activeBlock[0]) === "string") activeBlock = [4,4]
     if (keyName === 'up') {
       activeBlock[0] -= 1
     } else if (keyName === 'down') {
@@ -98,6 +99,10 @@ export default class ClassicMode extends React.Component {
     } else {
       activeBlock[1] += 1
     }
+    if(activeBlock[0] === 9) activeBlock[0] = 0
+    if(activeBlock[1] === 9) activeBlock[1] = 0
+    if(activeBlock[0] === -1) activeBlock[0] = 8
+    if(activeBlock[1] === -1) activeBlock[1] = 8
     this.setState({activeBlock})
   }
 
