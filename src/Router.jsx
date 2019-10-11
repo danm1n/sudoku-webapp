@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
-import NewGame from './pages/NewGame';
+import NewGame from './pages/GamePage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Edit_User from './pages/Edit_User'

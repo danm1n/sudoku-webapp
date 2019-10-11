@@ -8,10 +8,10 @@ module.exports = (generate,game_score) => {
             let genPuzzle = generate.intialBoard(mode);
             res.json({
                 status: 'success',
-                mode: genPuzzle[0],
+                level: genPuzzle[0],
                 grid: genPuzzle[1],
                 answer: genPuzzle[2],
-                mistake: genPuzzle[3]
+                lives: genPuzzle[3]
             });
         }
         catch (err) {

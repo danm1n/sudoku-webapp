@@ -48,9 +48,9 @@ module.exports = () => {
         } else {
             let answer = JSON.stringify(grid)
             if (level === "easy") rounds = 3, mistakes_allowed = 2
-            if (level === "intermediate") rounds = 62, mistakes_allowed = 3
-            if (level === "hard") rounds = 63, mistakes_allowed = 4
-            if (level === "expert") rounds = 64, mistakes_allowed = 5
+            if (level === "intermediate") rounds = 45, mistakes_allowed = 3
+            if (level === "hard") rounds = 50, mistakes_allowed = 4
+            if (level === "expert") rounds = 55, mistakes_allowed = 5
             for (var z = 0; z < rounds; z++) {
                 let row = generateNumber(0, 8)
                 let col = generateNumber(0, 8)

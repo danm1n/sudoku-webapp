@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styling/App.css';
-import ClassicGame from '../components/classic-game';
+import ClassicGame from '../game-modes/classic-sudoku';
 import NavBar from '../components/nav-bar';
 
 export default class NewGame extends React.Component {
@@ -18,7 +18,7 @@ export default class NewGame extends React.Component {
             </div>
         </div>
       </div>
-    )  
+    )
 }
 }
 
