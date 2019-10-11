@@ -36,7 +36,7 @@ const pool = new Pool({
   saveUninitialized: true
 }));
 
-app.use(express.static('lib'));
+app.use(express.static('build'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
