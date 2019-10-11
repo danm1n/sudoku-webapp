@@ -1,5 +1,5 @@
 {
-    "database" : "postgresql://codex:pg123@localhost:5432/testdb",
+    "database" : "postgresql://dan:pg123@localhost:5432/testdb",
     "secret": "i like burgers",
     "tokenLife": "24h",
     "testing": false
