@@ -51,8 +51,10 @@
 }
 
 .App-logo{
-  margin-top:2em;
-  height:20%;
+  margin-top: 2em;
+  height: 4.9em;
+  width: 4.9em;
+  border-radius: 100%;
 }
 
 .navCol {
@@ -67,6 +69,16 @@
     transform: rotate(360deg);
   }
 } */
+
+.heading{
+  font-size: 70px;
+    color: white;
+    margin-top: 25px;
+}
+
+.center-heading{
+  margin-top:200px
+}
 
 .editProfile{
   padding-top: 50px !important;

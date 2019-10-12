@@ -39,7 +39,8 @@ export default class HomePage extends React.Component {
       <div className="bg">
         <NavBar />
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center center-heading">
+            <h1 className="heading">Sudoku</h1>
             <img src={logo} className="App-logo" alt="logo" />
           </div>
           <div className="row justify-content-center">
