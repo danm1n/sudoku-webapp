@@ -45,6 +45,11 @@ export default class HomePage extends React.Component {
           </div>
           <div className="row justify-content-center">
             <div className="button">
+              <select class="custom-select choosegame-input">
+                <option>Choose Gamemode</option>
+                <option value="easy">Classic</option>
+                <option value="intermediate">TimeStrike</option>
+              </select>
               <div class="input-group">
                 <select class="custom-select" onChange={this.handleChange}>
                   <option selected>Choose Level</option>

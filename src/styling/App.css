@@ -76,8 +76,12 @@
     margin-top: 25px;
 }
 
+.choosegame-input{
+  margin-bottom:4px;
+}
+
 .center-heading{
-  margin-top:200px
+  margin-top:25vh;
 }
 
 .editProfile{
