@@ -2,10 +2,10 @@ const CheckSolution = require('../services/user/checkuserBoard')
 const user = CheckSolution()
 module.exports = (generate,game_score) => {
 
-    let all = (req, res) => {
-        let mode = req.params.mode;
+    let generateboard = (req, res) => {
+        let {mode,level} = req.params;
         try {
-            let genPuzzle = generate.intialBoard(mode);
+            let genPuzzle = generate.intialBoard(mode,level);
             res.json({
                 status: 'success',
                 level: genPuzzle[0],
@@ -53,7 +53,7 @@ module.exports = (generate,game_score) => {
     
 
         return {
-            all,
+            generateboard,
             checker,
             highscore
    }

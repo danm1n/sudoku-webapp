@@ -1,7 +1,7 @@
 const assert = require('assert');
 const express = require('express');
 
-const Sudoku = require('../services/sudoku/sudoku');
+const Sudoku = require('../services/sudoku/generate');
 const Game_Score = require('../services/user/game-score');
 const Signup = require('../services/user/signup');
 const Login = require('../services/user/login');

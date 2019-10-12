@@ -11,17 +11,23 @@ import Auth from '../Auth'
 export default class HomePage extends React.Component {
   state = {
     selectedLvl: "",
+    gameMode: "",
     redirect: false,
     popupMsg: ""
   }
 
-  handleChange = event => {
+  handleLevelChange = event => {
     let selectedLvl = event.target.value;
     this.setState({ selectedLvl })
   }
 
+  handleGameChange = event => {
+    let gameMode = event.target.value;
+    this.setState({ gameMode })
+  }
+
   startGame = () => {
-    if (this.state.selectedLvl !== "") {
+    if (this.state.selectedLvl !== "" && this.state.gameMode !== "") {
       this.setState({ popupMsg: "" })
       this.setState({ redirect: true })
     } else {
@@ -32,7 +38,7 @@ export default class HomePage extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={`/new-game/${this.state.selectedLvl}`} />
+      return <Redirect to={`/game/${this.state.gameMode}/${this.state.selectedLvl}`} />
     }
 
     return (
@@ -45,13 +51,13 @@ export default class HomePage extends React.Component {
           </div>
           <div className="row justify-content-center">
             <div className="button">
-              <select class="custom-select choosegame-input">
+              <select class="custom-select choosegame-input" onChange={this.handleGameChange}>
                 <option>Choose Gamemode</option>
-                <option value="easy">Classic</option>
-                <option value="intermediate">TimeStrike</option>
+                <option value="classic">Classic</option>
+                <option value="timestrike">TimeStrike</option>
               </select>
               <div class="input-group">
-                <select class="custom-select" onChange={this.handleChange}>
+                <select class="custom-select" onChange={this.handleLevelChange}>
                   <option selected>Choose Level</option>
                   <option value="easy">Easy</option>
                   <option value="intermediate">Intermediate</option>

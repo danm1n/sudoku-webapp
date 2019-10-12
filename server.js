@@ -8,7 +8,7 @@ require('dotenv').config()
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const Sudoku = require('./services/sudoku/sudoku');
+const Sudoku = require('./services/sudoku/generate');
 const Routes = require('./routes/sudoku_routes');
 const Game_Score = require('./services/user/game-score');
 const Sudoku_Api = require('./api/sudoku_api');

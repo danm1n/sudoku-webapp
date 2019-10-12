@@ -38,19 +38,21 @@ module.exports = () => {
         return;
     }
 
-    function intialBoard(level) {
+    function intialBoard(mode,level) {
         let rounds = 0;
         let mistakes_allowed = 0;
+        if(mode === 'timestrike') level = Number(level)
         resetG()
         populateGrid()
         if (sudoku_Solver.solve(grid, row, col) === "Retry") {
             intialBoard(level)
         } else {
             let answer = JSON.stringify(grid)
-            if (level === "easy") rounds = 3, mistakes_allowed = 2
-            if (level === "intermediate") rounds = 45, mistakes_allowed = 3
-            if (level === "hard") rounds = 50, mistakes_allowed = 4
-            if (level === "expert") rounds = 55, mistakes_allowed = 5
+            if(typeof(level) === 'number') rounds = level;
+            if (level === "easy") rounds = 3, mistakes_allowed = 10000
+            if (level === "intermediate") rounds = 45, mistakes_allowed = 60
+            if (level === "hard") rounds = 50, mistakes_allowed = 70
+            if (level === "expert") rounds = 55, mistakes_allowed = 80
             for (var z = 0; z < rounds; z++) {
                 let row = generateNumber(0, 8)
                 let col = generateNumber(0, 8)

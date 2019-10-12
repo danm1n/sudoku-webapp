@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class BuildGame extends React.Component {
+export default class BuildBoard extends React.Component {
   constructor(props) {
     super(props);
   }

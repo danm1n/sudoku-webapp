@@ -2,10 +2,21 @@ import React from 'react';
 import '../styling/App.css';
 import ClassicGame from '../game-modes/classic-sudoku';
 import NavBar from '../components/nav-bar';
+import TimeStrike from '../game-modes/time-strike';
 
 export default class NewGame extends React.Component {
     state ={
-        level: this.props.match.params.handle
+        mode: this.props.match.params.mode,
+        level: this.props.match.params.level
+    }
+
+    startgame = () => {
+        let {mode,level} = this.state
+        if(mode === "timestrike"){
+            return <TimeStrike level={level} />
+        }else{
+            return <ClassicGame level={level} />
+        }
     }
     
     render() {
@@ -14,7 +25,7 @@ export default class NewGame extends React.Component {
             <NavBar />
         <div className="container-fluid">
             <div className="row justify-content-center">
-            <ClassicGame level={this.state.level}/>
+            {this.startgame()}
             </div>
         </div>
       </div>

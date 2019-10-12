@@ -13,7 +13,7 @@ module.exports = (app, sudoku_api,user_api) => {
         res.redirect('/#/signup')
     });
     app.post('/verify', user_api.verify)
-    app.get('/api/new-game/:mode', checkToken, sudoku_api.all)
+    app.get('/api/game/:mode/:level', checkToken, sudoku_api.generateboard)
     app.get('/api/users/highscore', sudoku_api.highscore)
     app.get('/api/user/', checkToken,user_api.userData)
     app.use((req, res) => {

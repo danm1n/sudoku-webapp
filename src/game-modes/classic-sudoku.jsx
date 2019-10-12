@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Hotkeys from 'react-hot-keys';
-import '../styling/App.css';
 import Auth from '../Auth'
 import BuildBoard from '../components/build-board';
 import Modal from '../components/modal';
@@ -29,7 +28,7 @@ export default class ClassicMode extends React.Component {
       headers: { 'Authorization': `bearer:${Auth.getToken()}` }
     }
     let { level } = this.state
-    await axios.get(`/api/new-game/${level}`, config)
+    await axios.get(`/api/game/classic/${level}`, config)
       .then(res => {
         const { grid, answer, lives, level } = res.data;
         this.setState({ level, grid, answer, lives });
