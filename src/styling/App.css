@@ -84,6 +84,10 @@
   margin-top:25vh;
 }
 
+.tableMargin{
+  margin-top:70px;
+}
+
 .editProfile{
   padding-top: 50px !important;
 }
@@ -99,7 +103,6 @@
 
 table {
   color: black;
-  margin-top:50px;
   background-color: lightblue;
 }
 td {
@@ -193,4 +196,9 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 50px !important;
   background-color: rgba(0, 0, 0, 0.568) !important;
   color:white;
+}
+
+.time{
+  color:white;
+  width:100%;
 }

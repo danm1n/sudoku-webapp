@@ -120,7 +120,7 @@ export default class ClassicMode extends React.Component {
         <Hotkeys
           keyName="up,down,left,right"
           onKeyDown={this.onKeyDown.bind(this)}
-        ></Hotkeys>
+        />
         <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
@@ -139,7 +139,7 @@ export default class ClassicMode extends React.Component {
 
 
         <form onSubmit={this.handleSubmit}>
-          <table>
+          <table className="tableMargin">
             <BuildBoard grid={this.state.grid} 
             answer={this.state.answer} 
             activeBlock={this.state.activeBlock} 
