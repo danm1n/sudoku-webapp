@@ -1,10 +1,11 @@
 const CheckSolution = require('../services/user/checkuserBoard')
 const user = CheckSolution()
-module.exports = (generate, game_score) => {
+module.exports = (generate, game_score,logger) => {
 
-    let generateboard = (req, res) => {
+    let generateboard = async (req, res) => {
         let { mode, level } = req.params;
         try {
+            await logger.log_it(req.user,`Playing ${mode} mode, level:${level}`)
             let genPuzzle = generate.intialBoard(mode, level);
             res.json({
                 status: 'success',
@@ -31,6 +32,7 @@ module.exports = (generate, game_score) => {
             validGame = true;
         }
         if (validGame) {
+            await logger.log_it(req,user,`Completed ${gamemode} game`)
             await game_score.update_UserScore(gamemode, req.user, level)
             res.json({
                 status: 'success',

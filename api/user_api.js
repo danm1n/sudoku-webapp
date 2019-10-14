@@ -2,11 +2,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('../config/config')
 const saltRounds = 10;
-module.exports = (login, signup, update_user) => {
+module.exports = (login, signup, update_user,logger) => {
 
 
     let createUser = async (req, res) => {
         let { inputName, inputUsername, inputPassword, confirmPassword } = req.body
+        logger.log_it(`${inputName}/${inputUsername}`,'creating an account')
         if (inputPassword === confirmPassword) {
             bcrypt.hash(req.body.inputPassword, saltRounds, async function (err, hash) {
                 let checkUser = await signup.createAccount(inputName, inputUsername, hash);
@@ -38,6 +39,7 @@ module.exports = (login, signup, update_user) => {
         if (user) {
             const match = await bcrypt.compare(inputPassword, user.password);
             if (match === true) {
+                await logger.log_it(inputUsername,'logged in')
                 const token = jwt.sign({ username: user.username }, config.secret, { expiresIn: config.tokenLife })
                 res.json({
                     status: 'success',
@@ -58,11 +60,12 @@ module.exports = (login, signup, update_user) => {
         }
     }
 
-    const verify = (req, res) => {
+    const verify = async (req, res) => {
         let { token } = req.body
         try {
             if (token) {
                 let verifiedJwt = jwt.verify(token, config.secret);
+                await logger.log_it(verifiedJwt.username, 'token checked')
                 res.json({
                     status: 'Token Verified',
                     response: true,
@@ -94,6 +97,7 @@ module.exports = (login, signup, update_user) => {
 
     const editUser = async (req, res) => {
         const { inputName, inputUsername, inputPassword, confirmPassword } = req.body
+        await logger.log_it(req.user, 'editing profile')
         if (inputPassword === confirmPassword) {
             bcrypt.hash(inputPassword, saltRounds, async function (err, hash) {
                 await update_user.update_account(req.user, inputName, inputUsername, hash)

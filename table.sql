@@ -4,4 +4,11 @@ create table users (
     password text,
     highscore integer,
     level integer
-)
+);
+
+create table logger(
+    id serial not null,
+    username text,
+    event text,
+    time text
+);
