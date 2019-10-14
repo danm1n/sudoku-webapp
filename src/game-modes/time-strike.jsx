@@ -13,16 +13,25 @@ export default class TimeStrike extends React.Component {
             grid: [],
             answer:[], 
             level:1,
+            diffculty: props.level,
             onScreenKeyboard:[],
             response: [],
             modalBtnAction: [],
             activeBlock: ['', ''],
-            setduration:60 * 1/2,
+            setduration:1/2,
+            stopCounter: false,
             gameover: false
         }
     }
 
     async componentDidMount() {
+      let setduration;
+      let diffculty = this.state.diffculty
+      if(diffculty === 'easy') setduration = 1/2
+      if(diffculty === 'intermediate') setduration = 1/3
+      if(diffculty === 'hard') setduration = 1/4
+      if(diffculty === 'expert') setduration = 1/5
+      this.setState({setduration})
       await this.getPuzzle()
       this.startTimer()
       }
@@ -65,8 +74,12 @@ export default class TimeStrike extends React.Component {
             }
           }
           Modal.open()
+          let duration = this.state.setduration;
+          duration += 1/8;
           this.setState({ grid, 
             activeBlock: ['', ''],
+            setduration:duration,
+            stopCounter:true,
             response: ["Level completed","Next Level"],
             modalBtnAction:[false,this.nextLvl],
             level,
@@ -76,7 +89,7 @@ export default class TimeStrike extends React.Component {
       }
 
        startTimer = () => {
-        let duration = this.state.setduration;
+        let duration = this.state.setduration * 60
         let time_left,minutes,seconds;
         let countdown = setInterval(() => {
             minutes = parseInt(duration / 60, 10)
@@ -88,6 +101,7 @@ export default class TimeStrike extends React.Component {
                 clearInterval(countdown)
                this.gameover()
               }
+              if(this.state.stopCounter) clearInterval(countdown)
               time_left = minutes + ":" + seconds
               document.querySelector(".time").innerHTML = `Time:${time_left}`
         }, 1000);
@@ -98,9 +112,11 @@ export default class TimeStrike extends React.Component {
     }
 
     nextLvl = async () => {
-     await this.getPuzzle()
+      this.setState({stopCounter:false})
+     await this.getPuzzle();
       this.forceUpdate();
-      Modal.close()
+      this.startTimer();
+      Modal.close();
     }
 
     gameover = async () => {
@@ -116,7 +132,7 @@ export default class TimeStrike extends React.Component {
       let { grid,level } = (this.state)
       await axios.post(`/api/check/`, { gamemode,grid, level }, config)
         .then(res => {
-          // this.setState({ response: res.data.data })
+          
         })
     }
 
@@ -146,7 +162,7 @@ return(
           </div>
         </div>
     <h1 className="heading">TimeStrike</h1>
-    <span className="time">Time:00.00</span>
+    <div className="game-bar"><span className="time">Time:00.00</span><span>Level:{this.state.level}</span></div>
     <table>
     <BuildBoard grid={this.state.grid}
             answer={this.state.answer} 
