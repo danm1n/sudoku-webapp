@@ -1,11 +1,11 @@
 const CheckSolution = require('../services/user/checkuserBoard')
 const user = CheckSolution()
-module.exports = (generate,game_score) => {
+module.exports = (generate, game_score) => {
 
     let generateboard = (req, res) => {
-        let {mode,level} = req.params;
+        let { mode, level } = req.params;
         try {
-            let genPuzzle = generate.intialBoard(mode,level);
+            let genPuzzle = generate.intialBoard(mode, level);
             res.json({
                 status: 'success',
                 level: genPuzzle[0],
@@ -22,39 +22,44 @@ module.exports = (generate,game_score) => {
         }
     };
 
-    let checker = (req, res) => {
-        let {grid,level} = req.body;
-        // console.log(grid)
-        if(user.checkSolution(grid) === true){
-            game_score.increaseScore(req.user,level)
+    let checker = async (req, res) => {
+        let { gamemode, grid, level } = req.body;
+        let validGame;
+        if (gamemode !== 'timestrike') {
+            validGame = user.checkSolution(grid)
+        } else {
+            validGame = true;
+        }
+        if (validGame) {
+            await game_score.update_UserScore(gamemode, req.user, level)
             res.json({
                 status: 'success',
-                data: ['You won, well done!','New Game','/']
+                data: ['You won, well done!', 'New Game', '/']
             });
-        }else if(user.checkSolution(grid) === false){
+        } else if (user.checkSolution(grid) === false) {
             res.json({
                 status: 'success',
-                data: ['Looks like your numbers clash.','Try Again']
+                data: ['Looks like your numbers clash.', 'Try Again']
             });
-        }else{
+        } else {
             res.json({
                 status: 'success',
-                data: ['Looks like the puzzle is incomplete.','Resume']
-            });   
+                data: ['Looks like the puzzle is incomplete.', 'Resume']
+            });
         }
     }
 
-    let highscore = async (req,res) => {
-            res.json({
-                status: 'success',
-                data: await game_score.highscore_table()
-            });
-        }        
-    
+    let highscore = async (req, res) => {
+        res.json({
+            status: 'success',
+            data: await game_score.highscore_table()
+        });
+    }
 
-        return {
-            generateboard,
-            checker,
-            highscore
-   }
+
+    return {
+        generateboard,
+        checker,
+        highscore
+    }
 }

@@ -69,7 +69,8 @@ export default class ClassicMode extends React.Component {
         'Authorization': `bearer:${Auth.getToken()}`
       }
     }
-    await axios.post(`/api/check`, { grid, level }, config)
+    let gamemode = 'classic'
+    await axios.post(`/api/check`, { gamemode,grid, level }, config)
       .then(res => {
         this.setState({ response: res.data.data })
       })

@@ -14,10 +14,10 @@ export default class TimeStrike extends React.Component {
             answer:[], 
             level:1,
             onScreenKeyboard:[],
-            response: ["You ran out of time.","New Game"],
-            modalBtnAction: [false,this.redirect],
+            response: [],
+            modalBtnAction: [],
             activeBlock: ['', ''],
-            setduration:60 * 1/3,
+            setduration:60 * 1/2,
             gameover: false
         }
     }
@@ -50,15 +50,21 @@ export default class TimeStrike extends React.Component {
 
       onScreenbuttonTrigger = (event) => {
         let { grid,answer,activeBlock,level } = this.state;
-        let grid_copy = this.state.grid;
         let activeBtn = event.target.value;
         level += 1
         let row = activeBlock[0];
         let col = activeBlock[1];
         if (activeBlock !== '' && typeof(grid[row][col]) === "string") {
-          grid_copy[row][col] = Number(activeBtn);
-          if(JSON.stringify(grid_copy) === JSON.stringify(answer)){Modal.open()}
           grid[row][col] = activeBtn;
+          for(let row = 0;row < grid.length;row++){
+            for(let col = 0; col  < grid.length;col++){
+              if(Number(grid[row][col]) !== answer[row][col]){
+                this.setState({activeBlock: ['', '']})
+                return false;
+              }
+            }
+          }
+          Modal.open()
           this.setState({ grid, 
             activeBlock: ['', ''],
             response: ["Level completed","Next Level"],
@@ -80,7 +86,7 @@ export default class TimeStrike extends React.Component {
               duration --
               if(duration < 0){
                 clearInterval(countdown)
-                this.gameover()
+               this.gameover()
               }
               time_left = minutes + ":" + seconds
               document.querySelector(".time").innerHTML = `Time:${time_left}`
@@ -93,16 +99,25 @@ export default class TimeStrike extends React.Component {
 
     nextLvl = async () => {
      await this.getPuzzle()
-      this.dynamicBuildBtns()
       this.forceUpdate();
       Modal.close()
     }
 
-    gameover = () => {
+    gameover = async () => {
       Modal.open()
       this.setState({onScreenKeyboard:[],
-      modalBtnAction:[false,this.redirect]
+      modalBtnAction:[false,this.Redirect],
+      response: ["You ran out of time.","New Game"]
       })
+      let config = {
+        headers: {'Authorization': `bearer:${Auth.getToken()}`}
+      }
+      let gamemode = 'timestrike'
+      let { grid,level } = (this.state)
+      await axios.post(`/api/check/`, { gamemode,grid, level }, config)
+        .then(res => {
+          // this.setState({ response: res.data.data })
+        })
     }
 
       setActiveBlock = (coord) => {

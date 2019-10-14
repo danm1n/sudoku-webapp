@@ -30,6 +30,7 @@ export default class HighScore extends React.Component {
             children.push(<td>{z+1}</td>)
            children.push(<td>{userdata[z].username}</td>)
             children.push(<td>{userdata[z].highscore}</td>)
+            children.push(<td>{userdata[z].level}</td>)
             table.push(<tr>{children}</tr>)
     }
     return table;
@@ -46,7 +47,8 @@ export default class HighScore extends React.Component {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Username</th>
-      <th scope="col">Score</th>
+      <th scope="col">Classic Score</th>
+      <th scope="col">TimeStrike Level</th>
     </tr>
   </thead>
   <tbody>

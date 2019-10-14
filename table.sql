@@ -2,5 +2,6 @@ create table users (
     name text,
     username text,
     password text,
-    highscore integer
+    highscore integer,
+    level integer
 )
