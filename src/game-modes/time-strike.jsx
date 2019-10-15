@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom';
+import Hotkeys from 'react-hot-keys';
 import BuildBoard from '../components/build-board';
 import Auth from '../Auth';
 import axios from 'axios';
@@ -111,6 +112,25 @@ export default class TimeStrike extends React.Component {
       this.setState({ modalBtnAction: [true] })
     }
 
+    onKeyDown(keyName) {
+      let activeBlock = this.state.activeBlock;
+      if(typeof(activeBlock[0]) === "string") activeBlock = [4,4]
+      if (keyName === 'up') {
+        activeBlock[0] -= 1
+      } else if (keyName === 'down') {
+        activeBlock[0] += 1
+      } else if (keyName === 'left') {
+        activeBlock[1] -= 1
+      } else {
+        activeBlock[1] += 1
+      }
+      if(activeBlock[0] === 9) activeBlock[0] = 0
+      if(activeBlock[1] === 9) activeBlock[1] = 0
+      if(activeBlock[0] === -1) activeBlock[0] = 8
+      if(activeBlock[1] === -1) activeBlock[1] = 8
+      this.setState({activeBlock})
+    }
+
     nextLvl = async () => {
       this.setState({stopCounter:false})
      await this.getPuzzle();
@@ -146,6 +166,10 @@ render(){
   }
 return(
 <div>
+<Hotkeys
+          keyName="up,down,left,right"
+          onKeyDown={this.onKeyDown.bind(this)}
+        />
 <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
