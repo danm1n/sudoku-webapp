@@ -155,7 +155,12 @@ export default class TimeStrike extends React.Component {
           
         })
     }
-
+    newGameBtn = () => {
+      this.setState({ response: ["Are you sure you want to start a new game?", "Yes"] })
+      this.setState({ modalBtnAction: [false, this.Redirect] })
+      Modal.open()
+    }
+  
       setActiveBlock = (coord) => {
         this.setState({ activeBlock: coord })
       }
@@ -197,6 +202,9 @@ return(
 <div className="center-item">
 {this.state.onScreenKeyboard}
 </div>
+<div className="center-item">
+  <button type="button" className="btn btn-warning btn-md button" onClick={this.newGameBtn}>New Game</button>
+          </div>
 </div>
 )
 }
