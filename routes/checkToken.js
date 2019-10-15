@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
         if (typeof header !== 'undefined') {
         let bearer = header.split(':')
             var { username,admin } = jwt.verify(bearer[1], config.secret)
-            console.log(req.path)
             req.user = username
             req.isAdmin = admin
             req.token = bearer[1]

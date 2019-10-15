@@ -11,9 +11,9 @@ module.exports = (pool) => {
     const increaseScore = async (username,difficulty) => {
         let points = 0;
         if(difficulty === 'easy') points = 1;
-        if(difficulty === 'intermediate') points = 2;
-        if(difficulty === 'hard') points = 3;
-        if(difficulty === 'expert') points = 4;
+        if(difficulty === 'intermediate') points = 5;
+        if(difficulty === 'hard') points = 10;
+        if(difficulty === 'expert') points = 20;
         let userScore =  await pool.query('select highscore from users where username = $1',[username])
         let score = userScore.rows[0].highscore
         await pool.query('update users set highscore = $1 where username = $2',[score+points,username])

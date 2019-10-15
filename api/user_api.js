@@ -7,7 +7,7 @@ module.exports = (login, signup, update_user,logger) => {
 
     let createUser = async (req, res) => {
         let { inputName, inputUsername, inputPassword, confirmPassword } = req.body
-        logger.log_it(`${inputName}/${inputUsername}`,'creating an account')
+        await logger.log_it(`${inputName}/${inputUsername}`,'creating an account')
         if (inputPassword === confirmPassword) {
             bcrypt.hash(req.body.inputPassword, saltRounds, async function (err, hash) {
                 let checkUser = await signup.createAccount(inputName, inputUsername, hash);

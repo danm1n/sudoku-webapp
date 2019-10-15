@@ -32,7 +32,7 @@ module.exports = (generate, game_score,logger) => {
             validGame = true;
         }
         if (validGame) {
-            await logger.log_it(req,user,`Completed ${gamemode} game`)
+            await logger.log_it(req.user,`Completed ${gamemode} game`)
             await game_score.update_UserScore(gamemode, req.user, level)
             res.json({
                 status: 'success',
