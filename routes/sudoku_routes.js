@@ -1,5 +1,5 @@
 const checkToken = require('./checkToken')
-module.exports = (app, sudoku_api,user_api) => {
+module.exports = (app, sudoku_api,user_api,admin_api) => {
     
     app.get('/', (req, res) => {res.sendFile('index.html')});
     app.post('/login', user_api.sign_in)
@@ -13,6 +13,7 @@ module.exports = (app, sudoku_api,user_api) => {
         res.redirect('/#/signup')
     });
     app.post('/verify', user_api.verify)
+    app.get('/api/admin/log', checkToken, admin_api.viewLog)
     app.get('/api/game/:mode/:level', checkToken, sudoku_api.generateboard)
     app.get('/api/users/highscore', sudoku_api.highscore)
     app.get('/api/user/', checkToken,user_api.userData)

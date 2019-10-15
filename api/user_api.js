@@ -40,7 +40,7 @@ module.exports = (login, signup, update_user,logger) => {
             const match = await bcrypt.compare(inputPassword, user.password);
             if (match === true) {
                 await logger.log_it(inputUsername,'logged in')
-                const token = jwt.sign({ username: user.username }, config.secret, { expiresIn: config.tokenLife })
+                const token = jwt.sign({ username: user.username, admin:user.admin }, config.secret, { expiresIn: config.tokenLife })
                 res.json({
                     status: 'success',
                     data: 'Token created',

@@ -13,6 +13,7 @@ const Routes = require('./routes/sudoku_routes');
 const Game_Score = require('./services/user/game-score');
 const Sudoku_Api = require('./api/sudoku_api');
 const User_Api = require('./api/user_api');
+const Admin_Api = require('./api/admin_api');
 const Logger = require('./services/user/logger')
 
 const Signup = require('./services/user/signup');
@@ -44,13 +45,14 @@ app.use(bodyParser.json());
 const signup = Signup(pool);
 const login = Login(pool);
 const edit_user = Edit_User(pool);
-const logger = Logger(pool)
+const logger = Logger(pool);
 
 const sudoku = Sudoku();
 const game_score = Game_Score(pool,logger);
 const user_api = User_Api(login,signup,edit_user,logger);
 const sudoku_api = Sudoku_Api(sudoku,game_score,logger);
-Routes(app,sudoku_api,user_api)
+const admin_api = Admin_Api(logger)
+Routes(app,sudoku_api,user_api,admin_api)
 
 let PORT = process.env.PORT || 4732;
 

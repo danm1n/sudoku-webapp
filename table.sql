@@ -3,7 +3,8 @@ create table users (
     username text,
     password text,
     highscore integer,
-    level integer
+    level integer,
+    admin boolean
 );
 
 create table logger(

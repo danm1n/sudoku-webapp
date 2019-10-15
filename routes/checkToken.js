@@ -10,10 +10,16 @@ module.exports = (req, res, next) => {
         let header = req.headers['authorization'];
         if (typeof header !== 'undefined') {
         let bearer = header.split(':')
-            var username = jwt.verify(bearer[1], config.secret).username;
+            var { username,admin } = jwt.verify(bearer[1], config.secret)
+            console.log(req.path)
             req.user = username
+            req.isAdmin = admin
             req.token = bearer[1]
-            next();
+            if(req.path.includes('admin')){
+                if(admin) next(); else{
+                    res.sendStatus(403) 
+                }
+            }else{next();}
         } else {
             res.sendStatus(403)
         }
