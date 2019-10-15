@@ -8,6 +8,9 @@ const Routes = require('../routes/sudoku_routes');
 const Game_Score = require('../services/user/game-score');
 const Sudoku_Api = require('../api/sudoku_api');
 const User_Api = require('../api/user_api');
+const Edit_User = require('../services/user/edit_user');
+const Admin_Api = require('../api/admin_api');
+const Logger = require('../services/user/logger');
 const Signup = require('../services/user/signup');
 const Login = require('../services/user/login');
 const config = require('../config/config')
@@ -36,10 +39,13 @@ describe('------------------', function () {
     const signup = Signup(pool);
     const login = Login(pool);
     const sudoku = Sudoku();
-    const game_score = Game_Score(pool);
-    const user_api = User_Api(login, signup);
-    const sudoku_api = Sudoku_Api(sudoku, game_score);
-    Routes(app, sudoku_api, user_api)
+    const logger = Logger(pool);
+    const edit_user = Edit_User(pool);
+    const admin_api = Admin_Api(logger);
+    const game_score = Game_Score(pool,logger);
+    const user_api = User_Api(login, signup,edit_user,logger);
+    const sudoku_api = Sudoku_Api(sudoku, game_score,logger);
+    Routes(app, sudoku_api, user_api,admin_api)
     beforeEach(function () {
         config.testing = false;
     });
@@ -47,7 +53,7 @@ describe('------------------', function () {
     describe('Testing if API routes are protected', function () {
         it('Should respond with Forbidden as no user is logged in.', function (done) {
             supertest(app)
-                .get('/api/new-game/easy')
+                .get('/api/game/classic/easy')
                 .end((err, res) => {
                     expect(res.text).to.be.deep.equal("Forbidden")
                     expect(403, done);

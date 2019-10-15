@@ -1,10 +1,9 @@
 module.exports = (logger) => {
     
 
-    let viewLog = async (req, res) => {
+    let view_log = async (req, res) => {
         try {
             let log = await logger.viewLog();
-            console.log(log)
             res.json({
                 status:"success",
                 log,
@@ -20,6 +19,6 @@ module.exports = (logger) => {
 
 
 return{
-    viewLog
+    view_log
 }
 }
