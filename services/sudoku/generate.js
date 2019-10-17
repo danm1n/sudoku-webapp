@@ -44,7 +44,7 @@ module.exports = () => {
         if(mode === 'timestrike') level = Number(level)
         resetG()
         populateGrid()
-        if (sudoku_Solver.solve(grid, row, col) === "Retry") {
+        if (sudoku_Solver.solve(grid, row, col) === false) {
             intialBoard(level)
         } else {
             let answer = JSON.stringify(grid)
