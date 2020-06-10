@@ -2,21 +2,12 @@ const assert = require('assert');
 
 const Sudoku = require('../services/sudoku/generate');
 const config = require('../config/config')
-const pg = require("pg");
-
-const Pool = pg.Pool;
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
 if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
-const connectionString = process.env.DATABASE_URL || config.database;
-
-const pool = new Pool({
-    connectionString,
-    ssl: useSSL
-});
 
 describe('------------------', function () {
     describe('Testing Webapp Functions', function (){
