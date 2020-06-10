@@ -15,7 +15,8 @@ module.exports = (pool) => {
         if(difficulty === 'hard') points = 10;
         if(difficulty === 'expert') points = 20;
         let userScore =  await pool.query('select highscore from users where username = $1',[username])
-        let new_score = userScore.rows[0].highscore + points;
+        let score = userScore.rows[0]
+        let new_score = score.highscore+points
         await pool.query('update users set highscore = $1 where username = $2',[new_score,username])
     }
 
