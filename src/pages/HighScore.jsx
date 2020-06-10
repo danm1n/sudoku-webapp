@@ -42,19 +42,23 @@ export default class HighScore extends React.Component {
     <div className="bg">
       <NavBar />
       <div className="container">
+
+        <div style={{overflowY:"scroll", overflowX:"hidden", height:"70vh", marginTop:"50px", marginBottom:"50px"}}>
         <table className="table highscoreTable">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col">Classic Score</th>
-      <th scope="col">TimeStrike Level</th>
+      <th style={{color:"black"}} scope="col">#</th>
+      <th style={{color:"black"}} scope="col">Username</th>
+      <th style={{color:"black"}} scope="col">Classic Score</th>
+      <th style={{color:"black"}} scope="col">TimeStrike Level</th>
     </tr>
   </thead>
   <tbody>
       {this.makeTable()}
       </tbody>
         </table>
+        </div>
+
       </div>
     </div>
   )

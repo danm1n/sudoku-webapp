@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styling/App.css';
 import Router from './Router';
 import Auth from './Auth'
+import Footer from './components/footer';
 
 
 class App extends Component {
@@ -15,19 +16,22 @@ class App extends Component {
   render() {
     if (this.state.loading) {
       return (
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-            <h2 class="display-4">Sudoku Webapp<p class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </p></h2>
-            <p>If loading persists, <a href="/">Click Me</a></p>
+        <div className="bg">
+          <div style={{height: "100vh"}}>
+            <div class="centered">
+              <span style={{float:'left', fontSize:25, color:'white'}}>Sudoku With A Difference</span>
+            <p style={{marginLeft:5, verticalAlign:"middle"}} class="spinner-border text-warning" role="status"></p>
+            <p style={{color:"white"}}>If loading persists, <a style={{color:"#ffc107"}} href="/">Click Me</a></p>
+            </div>
           </div>
+          <Footer />
         </div>
       )
     }
     return (
       <div className="App">
         <Router />
+        <Footer />
       </div>
     );
   }

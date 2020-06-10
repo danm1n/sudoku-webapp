@@ -21,13 +21,13 @@ export default class NavBar extends React.Component {
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark navCol">
-  <Link className="navbar-brand" to="/">Sudoku</Link>
+  <Link className="navbar-brand" to="/">Sudoku With A Difference</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse" id="navbarNavDropdown">
     <ul className="navbar-nav mr-auto">
-      <li className="nav-item active">
+      <li className="nav-item">
         <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item">
@@ -42,8 +42,8 @@ export default class NavBar extends React.Component {
     Welcome, {this.state.username}
   </button>
   <div className="dropdown-menu dropdown-menu-right">
-    <Link to="/edit-user"><button className="dropdown-item" type="button">Edit Profile</button></Link>
-    <button className="dropdown-item" type="button" onClick={this.signout}>Sign Out</button>
+    <Link className="text-link" to="/edit-user"><button className="btn btn-light dropdown-item" type="button">Edit Profile</button></Link>
+    <button className="btn btn-light dropdown-item" type="button" onClick={this.signout}>Sign Out</button>
   </div>
 </div>
   </div>

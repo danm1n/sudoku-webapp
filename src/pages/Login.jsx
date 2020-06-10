@@ -29,7 +29,7 @@ export default class Login extends React.Component {
 
     await axios.post(`/login`, form)
       .then(res => {
-        let alert = [<div class="alert alert-warning" role="alert">
+        let alert = [<div style={{marginLeft:7}} class="alert alert-warning" role="alert">
           {res.data.data}
         </div>]
         this.setState({ alert: alert[0] })
@@ -56,16 +56,16 @@ export default class Login extends React.Component {
     return (
       <div className="bg form-place">
         <form className="form-signin" onSubmit={this.handleSubmit}>
-          <h1 className="h3 mb-3 font-weight-normal">Sign in to play</h1>
+          <h1 className="h3 mb-3 font-weight-normal" style={{marginLeft:7}}>Sign in to play</h1>
           <label for="inputUsername" className="sr-only">Username</label>
           <input name="inputUsername" onChange={this.handleChange} type="text" id="inputUsername" className="form-control" placeholder="Username" required autofocus="" />
           <label for="inputPassword" className="sr-only">Password</label>
           <input name="inputPassword" onChange={this.handleChange} type="password" id="inputPassword" className="form-control" placeholder="Password" required />
           <div className="checkbox mb-3">
-            <p>Dont have an account?<Link to="/signup">Create account</Link></p>
+            <p style={{marginLeft:7}}>Dont have an account?<Link to="/signup">Create account</Link></p>
           </div>
           {this.state.alert}
-          <button className="btn btn-lg btn-warning btn-block" type="submit">Sign in</button>
+          <button className="btn btn-lg btn-warning btn-block" type="submit" style={{marginLeft:7}}>Sign in</button>
         </form>
       </div>
     )

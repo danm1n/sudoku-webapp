@@ -46,5 +46,6 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^14.1.1",
     "supertest": "^4.0.2"
-  }
+  },
+  "proxy":"http://localhost:4732"
 }

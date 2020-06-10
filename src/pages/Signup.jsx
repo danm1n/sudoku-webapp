@@ -26,7 +26,7 @@ export default class Signup extends React.Component {
 
         await axios.post(`/signup`, form)
             .then(res => {
-                let alert = [<div class="alert alert-warning" role="alert">
+                let alert = [<div style={{marginLeft:7}} class="alert alert-warning" role="alert">
                     {res.data.reason}
                 </div>]
                 if(res.data.reason === "User account created."){
@@ -59,7 +59,7 @@ export default class Signup extends React.Component {
         return (
             <div className="bg form-place">
                 <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Signup</h1>
+                    <h1 className="h3 mb-3 font-weight-normal" style={{marginLeft:7}}>Create Account</h1>
                     <label for="inputName" className="sr-only">Name</label>
                     <input name="inputName" onChange={this.handleChange} type="text" id="inputName" className="form-control" placeholder="Enter Name" required autofocus="" />
 
@@ -71,7 +71,7 @@ export default class Signup extends React.Component {
                     <label for="confirmPassword" className="sr-only">Confirm Password</label>
                     <input name="confirmPassword" onChange={this.handleChange} type="password" id="inputPassword" className="form-control" placeholder="Confirm Password" required />
                     <span>{this.state.alert}</span>
-                    <button className="btn btn-lg btn-warning btn-block" type="submit">Sign up</button>
+                    <button className="btn btn-lg btn-warning btn-block" type="submit" style={{marginLeft:7}}>Sign up</button>
                 </form>
             </div>
         )
