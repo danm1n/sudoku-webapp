@@ -47,8 +47,8 @@ describe('------------------', function () {
     Routes(app, sudoku_api, user_api,admin_api)
     beforeEach(async function () {
         config.testing = true;
-        let table = await pool.query('SELECT username,highscore,level FROM users ORDER BY highscore DESC')
-        highscoresTable = table.rows
+        let table = await pool.query('SELECT username,highscore,level FROM users ORDER BY highscore DESC');
+        highscoresTable = table.rows;
     });
 
     describe('Testing Sudoku game API', function () {
@@ -70,8 +70,8 @@ describe('------------------', function () {
                 .send(form)
                 .set('Accept', 'application/json, text/plain, */*')
                 .end((err, res) => {
-                    let response = res.body.data[0];
-                    expect(response).to.be.equal('Looks like your numbers clash.')
+                    let response = res.body.data;
+                    expect(response[0]).to.be.equal('Looks like your numbers clash.')
                     expect(200, done);
                 })
                 done();
@@ -83,8 +83,8 @@ describe('------------------', function () {
                 .send(form)
                 .set('Accept', 'application/json, text/plain, */*')
                 .end((err, res) => {
-                    let response = res.body.data[0];
-                    expect(response).to.be.equal('You won, well done!')
+                    let response = res.body.data;
+                    expect(response[0]).to.be.equal('You won, well done!')
                     expect(200, done);
                 })
                 done();      
