@@ -60,8 +60,8 @@ describe('------------------', function () {
                     expect(res.body.status).to.be.deep.equal("success")
                     expect(res.body.grid.length).to.be.equal(9)
                     expect(200, done);
-                    done();
                 })
+                done();
         });
         it('Should send sudoku puzzle to server and return a [looks like your numbers clash]', function (done) {
             let form = {gamemode:"classic", grid: [[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "1", "1", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "1"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]],level:"easy" }
@@ -72,8 +72,8 @@ describe('------------------', function () {
                 .end((err, res) => {
                     expect(res.body.data[0]).to.be.equal('Looks like your numbers clash.')
                     expect(200, done);
-                    done();
                 })
+                done();
         });
         it('Should send sudoku puzzle to server and return a [You won, well done!]', function (done) {
             let form = {gamemode:"classic", grid: [[2, 3, 1, 4, 5, 7, 8, 6, 9], [4, 6, 7, 1, 9, 8, "2", "5", 3], [5, 8, 9, 2, 6, 3, 4, 7, 1], [1, 2, 3, 6, 4, 5, 7, 9, 8], [6, 9, 4, 8, 7, 1, 5, 3, 2], [7, 5, 8, 9, 3, 2, 1, 4, "6"], [9, 1, 6, 5, 8, 4, 3, 2, 7], [3, 4, 2, 7, 1, 9, 6, 8, 5], [8, 7, 5, 3, 2, 6, 9, 1, 4]], level:"easy" }
@@ -84,8 +84,8 @@ describe('------------------', function () {
                 .end((err, res) => {
                     expect(res.body.data[0]).to.be.equal('You won, well done!')
                     expect(200, done);
-                    done();
                 })
+                done();      
         });
     });
     describe('Testing User Highscore API', function () {
@@ -99,8 +99,8 @@ describe('------------------', function () {
                         highscoresTable
                     )
                     expect(200, done);
-                    done();
                 })
+                done();
         });
     })
 });
