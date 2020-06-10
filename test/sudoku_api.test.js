@@ -70,7 +70,8 @@ describe('------------------', function () {
                 .send(form)
                 .set('Accept', 'application/json, text/plain, */*')
                 .end((err, res) => {
-                    expect(res.body.data[0]).to.be.equal('Looks like your numbers clash.')
+                    let response = res.body.data[0];
+                    expect(response).to.be.equal('Looks like your numbers clash.')
                     expect(200, done);
                 })
                 done();
@@ -82,7 +83,8 @@ describe('------------------', function () {
                 .send(form)
                 .set('Accept', 'application/json, text/plain, */*')
                 .end((err, res) => {
-                    expect(res.body.data[0]).to.be.equal('You won, well done!')
+                    let response = res.body.data[0];
+                    expect(response).to.be.equal('You won, well done!')
                     expect(200, done);
                 })
                 done();      
