@@ -20,22 +20,22 @@ describe('------------------', function () {
         it('Should return a random generated, game which difficulty is [easy], width 9 arrays', function () {
             const sudoku = Sudoku();
             let puzzle = sudoku.intialBoard('easy')
-            assert.deepEqual(puzzle[1].length, 9)
+            assert.equal(puzzle[1].length, 9)
         });
         it('Should return a random generated, game which difficulty is [intermediate], width 9 arrays', function () {
             const sudoku = Sudoku();
             let puzzle = sudoku.intialBoard('intermediate')
-            assert.deepEqual(puzzle[1].length, 9)
+            assert.equal(puzzle[1].length, 9)
         });
         it('Should return a random generated, game which difficulty is [hard], width 9 arrays', function () {
             const sudoku = Sudoku();
             let puzzle = sudoku.intialBoard('hard')
-            assert.deepEqual(puzzle[1].length, 9)
+            assert.equal(puzzle[1].length, 9)
         });
         it('Should return a random generated, game which difficulty is [expert], width 9 arrays', function () {
             const sudoku = Sudoku();
             let puzzle = sudoku.intialBoard('expert')
-            assert.deepEqual(puzzle[1].length, 9)
+            assert.equal(puzzle[1].length, 9)
         });
     });
 });
