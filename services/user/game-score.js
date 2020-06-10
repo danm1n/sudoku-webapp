@@ -1,6 +1,8 @@
+let config = require('../../config/config.json');
 module.exports = (pool) => {
 
     const update_UserScore = async (gamemode,username,difficulty) => {
+        if(config.testing) return;
         if(gamemode === 'timestrike'){
             await levelUp(username,difficulty)
         }else{
