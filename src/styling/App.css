@@ -140,6 +140,7 @@ thead th {
 .game-input{
   width:100%;
   height: 100%;
+  margin:0px !important;
   background-color: rgba(255, 255, 255, 0);
   padding:3px;
   color:black;
@@ -150,6 +151,7 @@ thead th {
 .wrong-input{
   width:100%;
   height: 100%;
+  margin:0px !important;
   background-color: #dc3545;
   color:black;
   text-align: center;
@@ -159,6 +161,7 @@ thead th {
 .correct-input{
   width:100%;
   height: 100%;
+  margin:0px !important;
   background-color: #28a745;
   color:black;
   text-align: center;
@@ -168,6 +171,7 @@ thead th {
 .active-nofill{
   width:100%;
   height: 100%;
+  margin:0px !important;
   background-color: grey;
   color:rgb(0, 0, 0);
   text-align: center;
@@ -177,6 +181,7 @@ thead th {
 .active-block{
   width:100%;
   height: 100%;
+  margin:0px !important;
   background-color: #17a2b8;
   color:rgb(0, 0, 0);
   text-align: center;
