@@ -139,8 +139,8 @@ export default class ClassicMode extends React.Component {
         </div>
 
 
-        <form onSubmit={this.handleSubmit}>
-          <table className="tableMargin">
+        <form className="gameDiv" onSubmit={this.handleSubmit}>
+          <table>
             <BuildBoard grid={this.state.grid} 
             answer={this.state.answer} 
             activeBlock={this.state.activeBlock} 
